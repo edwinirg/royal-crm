@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<title>Royal Prestige CRM desktop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0}
+*{box-sizing:border-box}
+.app{--bg:#F5F8FD;--card:#FFFFFF;--ink:#101828;--mut:#4F5D78;--line:#DCE4F0;--sub:#EBF0F8;--acc:#0F3C99;--onacc:#FFFFFF;--accsoft:#E1EAFB;--acctxt:#0F3C99;--goldsoft:#FBEFD2;--goldtxt:#6F4F12;--ok:#1F6B45;--oksoft:#DDF0E5;--warn:#9A4A00;--warnsoft:#FBE9D2;--bad:#A3262A;--badsoft:#F9DEDE;--shadow:0 1px 2px rgba(16,24,40,.06),0 4px 14px rgba(16,24,40,.07);--c-visita:#8A5A00;--c-demo:#0F3C99;--c-show:#A02F6B;--c-recl:#1B7A73;--c-seg:#6556A8}
+.app.dark{--bg:#0B1220;--card:#131C30;--ink:#EEF3FC;--mut:#A6B3CC;--line:#243352;--sub:#1A2744;--acc:#86AEFF;--onacc:#07163A;--accsoft:#16284F;--acctxt:#B3CBFF;--goldsoft:#3A2F1A;--goldtxt:#EDCB88;--ok:#7BD3A0;--oksoft:#16301F;--warn:#F0B070;--warnsoft:#38260F;--bad:#F2928F;--badsoft:#3B1B1B;--shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);--c-visita:#E8B85C;--c-demo:#86AEFF;--c-show:#F08CB8;--c-recl:#5FC7BF;--c-seg:#B4A7E8}
+.app.celeste{--acc:#0A5CB8;--accsoft:#DCEBFA;--acctxt:#0A5CB8}
+.app.dark.celeste{--acc:#7CC0FF;--onacc:#062244;--accsoft:#12304F;--acctxt:#A9D5FF}
+.app button,.app input,.app textarea{font-family:inherit;color:inherit;font-size:inherit}
+.app button{cursor:pointer}
+.app :focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;border:0;background:var(--acc);color:var(--onacc);font-size:14.5px;font-weight:700}
+.app .btn{color:var(--onacc)}
+.btn2{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:14.5px;font-weight:700}
+.chip{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.chip.on{background:var(--acc);color:var(--onacc);border-color:var(--acc)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap;background:var(--sub);color:var(--ink)}
+.st-cita{background:#D6F0EC;color:#0F5E58}.st-demo{background:var(--accsoft);color:var(--acctxt)}.st-seg{background:var(--goldsoft);color:var(--goldtxt)}.st-cerrada{background:var(--oksoft);color:var(--ok)}.st-nov{background:var(--badsoft);color:var(--bad)}
+.app.dark .st-cita{background:#12302E;color:#7FDCD3}
+.pill.warn{background:var(--warnsoft);color:var(--warn)}.pill.ok{background:var(--oksoft);color:var(--ok)}
+.input{width:100%;min-height:46px;border-radius:12px;border:1px solid var(--line);background:var(--card);padding:0 14px;font-size:15px}
+textarea.input{padding:12px 14px;min-height:90px;resize:none}
+select.input{appearance:auto;padding-right:10px}
+input[type=date].input,input[type=time].input{appearance:auto}
+.app.dark{color-scheme:dark}
+.input:disabled{background:var(--sub);color:var(--mut)}
+.lbl{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
+.tile{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none}
+.ty-visita{--tc:var(--c-visita)}.ty-demo{--tc:var(--c-demo)}.ty-show{--tc:var(--c-show)}.ty-recl{--tc:var(--c-recl)}.ty-seg{--tc:var(--c-seg)}
+.tile.ty{background:color-mix(in srgb,var(--tc) 16%,var(--card));color:var(--tc)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--tc);flex:none}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--accsoft);color:var(--acctxt);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex:none}
+.big{font-size:28px;font-weight:800;font-variant-numeric:tabular-nums}
+.nav{display:flex;align-items:center;gap:12px;min-height:44px;width:100%;padding:0 12px;border:0;border-radius:12px;background:transparent;font-weight:700;font-size:14.5px;color:var(--mut);text-align:left}
+.nav.on{background:var(--accsoft);color:var(--acctxt)}
+.scrollx{overflow-x:auto}
+.ev{border-radius:12px;padding:8px 10px;border:1px solid var(--line);background:color-mix(in srgb,var(--tc) 10%,var(--card));text-align:left;display:flex;flex-direction:column;gap:2px;width:100%;min-height:52px}
+</style>
+</helmet>
+<div class="app {{themeCls}} {{accCls}}" style="display:flex;flex-wrap:wrap;min-height:900px;background:var(--bg);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:15px">
+<sc-if value="{{v.login}}" hint-placeholder-val="{{ false }}">
+<div style="flex:1 1 100%;min-height:900px;display:flex;flex-wrap:wrap">
+<section style="flex:1 1 420px;background:var(--acc);color:var(--onacc);padding:56px 48px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:20px"><img src="logo.png" alt="Royal Prestige, distribuidor autorizado" style="width:200px;height:200px;border-radius:50%;background:#fff;box-shadow:0 12px 32px rgba(0,0,0,.25)"><h1 style="margin:0;font-size:44px;font-weight:800;letter-spacing:-.02em;line-height:1.05">Royal Prestige<br>CRM de ventas</h1><p style="margin:0;max-width:440px;font-size:17px;line-height:1.5;opacity:.95">Visitas, clientes, demos y resultados de tu red en un solo lugar.</p></section>
+<section style="flex:1 1 460px;display:flex;align-items:center;justify-content:center;padding:40px 28px"><div style="width:100%;max-width:480px;display:flex;flex-direction:column;gap:14px"><h2 style="margin:0;font-size:28px;font-weight:800">Iniciar sesión</h2>
+<sc-if value="{{hasLoginErr}}" hint-placeholder-val="{{ false }}"><div role="alert" style="background:var(--badsoft);color:var(--bad);border-radius:14px;padding:12px 14px;font-weight:700;font-size:14px;display:flex;gap:8px;align-items:center"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.alert}}"/></svg>{{loginErr}}</div></sc-if>
+<label class="lbl" for="lg1">Correo</label><input id="lg1" class="input" type="email" autocomplete="username" value="{{loginEmail}}" onChange="{{onLoginEmail}}">
+<label class="lbl" for="lg2">Contraseña</label><input id="lg2" class="input" type="password" autocomplete="current-password" value="{{loginPass}}" onChange="{{onLoginPass}}">
+<button class="btn" style="min-height:48px" onClick="{{doLogin}}">Iniciar sesión</button>
+<div class="lbl" style="margin-top:8px">Acceso de demostración</div>
+<sc-for list="{{loginRoles}}" as="r" hint-placeholder-count="4"><button class="card" onClick="{{r.pick}}" aria-pressed="{{r.on}}" style="display:flex;align-items:center;gap:12px;padding:10px 12px;min-height:64px;text-align:left;width:100%;border:2px solid {{r.border}}"><span class="avatar">{{r.ini}}</span><span style="flex:1"><b style="display:block;font-size:14.5px">{{r.l}}</b><span style="font-size:12.5px;color:var(--mut)">{{r.d}}</span></span><sc-if value="{{r.on}}" hint-placeholder-val="{{ false }}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--acctxt)"><path d="{{ic.check}}"/></svg></sc-if></button></sc-for>
+<span style="font-size:12px;color:var(--mut)">Prototipo con datos ficticios. Cuentas y contraseña de demostración.</span></div></section>
+</div>
+</sc-if>
+<sc-if value="{{showApp}}" hint-placeholder-val="{{ true }}">
+<aside style="flex:1 1 240px;max-width:272px;min-width:220px;background:var(--card);border-right:1px solid var(--line);padding:20px 14px;display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;align-items:center;gap:10px;padding:4px 8px 18px"><img src="logo.png" alt="Royal Prestige" style="width:48px;height:48px;border-radius:50%;box-shadow:var(--shadow);background:#fff"><div><div style="font-weight:800;font-size:18px;letter-spacing:-.01em">Royal Prestige</div><div style="font-size:12px;color:var(--mut)">CRM de ventas</div></div></div>
+<sc-for list="{{navItems}}" as="n" hint-placeholder-count="6"><button class="nav {{n.cls}}" aria-current="{{n.on}}" onClick="{{n.go}}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{n.path}}"/></svg>{{n.l}}</button></sc-for>
+<div class="lbl" style="padding:16px 12px 4px">Más</div>
+<sc-for list="{{moreItems}}" as="n" hint-placeholder-count="3"><a href="Main.dc.html" class="nav" style="text-decoration:none"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{n.path}}"/></svg>{{n.l}}<span class="pill" style="margin-left:auto">móvil</span></a></sc-for>
+<div style="margin-top:auto;display:flex;flex-direction:column;gap:10px">
+<div class="chips"><sc-for list="{{themeOpts}}" as="t" hint-placeholder-count="2"><button class="chip {{t.cls}}" aria-pressed="{{t.on}}" onClick="{{t.pick}}">{{t.l}}</button></sc-for></div>
+<div style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:14px;background:var(--sub)"><span class="avatar">{{me.ini}}</span><div><b style="display:block;font-size:14px">{{me.n}}</b><span style="font-size:12px;color:var(--mut)">{{me.rol}}</span></div></div>
+<button class="btn2" onClick="{{logout}}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.out}}"/></svg>Cerrar sesión</button>
+</div>
+</aside>
+<main style="flex:999 1 560px;min-width:0;display:flex;flex-direction:column">
+<header style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:18px 28px;border-bottom:1px solid var(--line)">
+<div style="flex:1 1 220px"><div style="font-size:13px;color:var(--mut);font-weight:600">Jueves 8 de octubre de 2026</div><h1 style="margin:0;font-size:26px;font-weight:800;letter-spacing:-.01em">{{title}}</h1></div>
+<label style="position:relative;flex:0 1 280px"><span style="position:absolute;left:12px;top:13px;color:var(--mut)"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.search}}"/></svg></span><span style="position:absolute;width:1px;height:1px;overflow:hidden">Buscar</span><input class="input" style="padding-left:40px" placeholder="Buscar cliente o colonia" value="{{q}}" onChange="{{onQ}}"></label>
+<button class="btn2" aria-label="Notificaciones" style="width:44px;padding:0;position:relative" onClick="{{say.bell}}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.bell}}"/></svg><span style="position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;border-radius:10px;background:var(--acc);color:var(--onacc);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center">4</span></button>
+<button class="btn2" onClick="{{addClient}}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.userplus}}"/></svg>Agregar cliente</button>
+<button class="btn" onClick="{{addVisit}}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.plus}}"/></svg>Agendar visita</button>
+</header>
+<div style="padding:24px 28px 40px;display:flex;flex-direction:column;gap:20px">
+<sc-if value="{{v.inicio}}" hint-placeholder-val="{{ true }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr));gap:16px">
+<sc-for list="{{kpiCards}}" as="k" hint-placeholder-count="4"><div class="card" style="padding:18px;display:flex;flex-direction:column;gap:6px"><span class="lbl">{{k.l}}</span><span class="big">{{k.v}}</span><span style="font-size:13px;font-weight:700;color:{{k.color}}">{{k.d}}</span></div></sc-for>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+<section style="flex:2 1 460px;min-width:0;display:flex;flex-direction:column;gap:12px"><div style="display:flex;align-items:baseline;justify-content:space-between"><h2 style="margin:0;font-size:19px;font-weight:800">Día de la compañía</h2><button class="btn2" onClick="{{goAgenda}}">Abrir agenda</button></div>
+<sc-for list="{{todayEvs}}" as="e" hint-placeholder-count="5"><button class="card" onClick="{{e.open}}" style="display:flex;align-items:center;gap:14px;padding:12px 16px;text-align:left;min-height:68px;width:100%"><span style="width:52px;font-weight:800;font-variant-numeric:tabular-nums">{{e.time}}</span><span class="tile ty {{e.tyCls}}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{e.iconPath}}"/></svg></span><span style="flex:1;min-width:0"><b style="display:block">{{e.typeL}} · {{e.who}}</b><span style="font-size:13px;color:var(--mut)">{{e.sub}} · {{e.ownerS}}</span></span><span class="pill {{e.sCls}}">{{e.status}}</span></button></sc-for></section>
+<aside style="flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:16px">
+<section class="card" style="padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--warnsoft);border-color:transparent"><div style="display:flex;align-items:center;gap:8px;color:var(--warn);font-weight:800"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.alert}}"/></svg>{{pendCount}} cierres pendientes</div>
+<sc-for list="{{pendList}}" as="p" hint-placeholder-count="2"><button onClick="{{p.close}}" style="min-height:52px;border-radius:12px;border:0;background:var(--card);display:flex;align-items:center;gap:10px;padding:8px 12px;text-align:left"><span style="flex:1"><b style="display:block;font-size:14px">{{p.who}}</b><span style="font-size:12.5px;color:var(--mut)">{{p.when}} · {{p.ownerS}}</span></span><span class="pill warn">Registrar</span></button></sc-for></section>
+<section class="card" style="padding:16px;display:flex;flex-direction:column;gap:8px"><b>Accesos rápidos</b><button class="btn" onClick="{{newDemo}}">+ Nueva demo</button><button class="btn2" onClick="{{addClient}}">+ Cliente</button><button class="btn2" onClick="{{addVisit}}">+ Visita</button></section>
+</aside></div>
+</sc-if>
+<sc-if value="{{v.agenda}}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center"><div class="chips"><sc-for list="{{promChips}}" as="c" hint-placeholder-count="5"><button class="chip {{c.cls}}" aria-pressed="{{c.on}}" onClick="{{c.pick}}">{{c.l}}</button></sc-for></div>
+<div style="display:flex;gap:14px;flex-wrap:wrap;margin-left:auto;font-size:13px;color:var(--mut);font-weight:600"><sc-for list="{{legend}}" as="l" hint-placeholder-count="5"><span class="{{l.tyCls}}" style="display:flex;align-items:center;gap:6px"><span class="dot"></span>{{l.l}}</span></sc-for></div></div>
+<div class="scrollx"><div style="display:grid;grid-template-columns:repeat(7,minmax(168px,1fr));gap:12px;min-width:1200px">
+<sc-for list="{{weekCols}}" as="d" hint-placeholder-count="7"><section style="display:flex;flex-direction:column;gap:8px"><div class="card" style="padding:10px 12px;display:flex;align-items:center;gap:8px;background:{{d.bg}};color:{{d.fg}}"><b>{{d.lbl}} {{d.num}}</b><span style="margin-left:auto;font-size:12px;font-weight:700">{{d.count}}</span></div>
+<sc-for list="{{d.evs}}" as="e" hint-placeholder-count="2"><button class="ev {{e.tyCls}}" onClick="{{e.open}}"><span style="display:flex;align-items:center;gap:6px;font-weight:800;font-size:13px"><span class="dot"></span>{{e.time}}<span style="margin-left:auto;font-weight:600;font-size:12px;color:var(--mut)">{{e.ownerS}}</span></span><span style="font-size:13px;font-weight:600">{{e.typeL}}</span><span style="font-size:12px;color:var(--mut)">{{e.who}}</span><sc-if value="{{e.pend}}" hint-placeholder-val="{{ false }}"><span class="pill warn" style="align-self:flex-start;margin-top:4px">Cierre pendiente</span></sc-if></button></sc-for>
+<sc-if value="{{d.empty}}" hint-placeholder-val="{{ false }}"><div style="border:1.5px dashed var(--line);border-radius:12px;padding:16px 8px;text-align:center;color:var(--mut);font-size:13px">Día libre</div></sc-if></section></sc-for>
+</div></div>
+</sc-if>
+<sc-if value="{{v.clientes}}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+<section style="flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:12px"><div class="chips"><sc-for list="{{etapaChips}}" as="c" hint-placeholder-count="7"><button class="chip {{c.cls}}" aria-pressed="{{c.on}}" onClick="{{c.pick}}">{{c.l}} <span style="opacity:.75">{{c.n}}</span></button></sc-for></div>
+<sc-for list="{{clientList}}" as="c" hint-placeholder-count="6"><button class="card" onClick="{{c.pick}}" style="display:flex;align-items:center;gap:12px;padding:12px 14px;text-align:left;min-height:68px;width:100%;border:2px solid {{c.border}}"><span class="avatar">{{c.ini}}</span><span style="flex:1;min-width:0"><b style="display:block">{{c.n}}</b><span style="font-size:13px;color:var(--mut)">{{c.col}}, {{c.muni}} · {{c.ultTxt}}</span></span><span class="pill st-{{c.etapa}}">{{c.etapaL}}</span></button></sc-for>
+<sc-if value="{{clientsEmpty}}" hint-placeholder-val="{{ false }}"><div class="card" style="padding:32px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px"><b>No encontramos clientes</b><span style="color:var(--mut)">Prueba con otro nombre o quita el filtro de etapa.</span><button class="btn2" onClick="{{clearQ}}">Limpiar búsqueda</button></div></sc-if></section>
+<section style="flex:1.3 1 420px;min-width:0;display:flex;flex-direction:column;gap:14px">
+<div class="card" style="padding:20px;display:flex;flex-direction:column;gap:16px"><div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><span class="avatar" style="width:68px;height:68px;font-size:24px">{{cl.ini}}</span><div style="flex:1 1 180px"><h2 style="margin:0;font-size:22px;font-weight:800">{{cl.n}}</h2><div style="color:var(--mut);margin:2px 0 6px">{{cl.muni}} · Origen: {{cl.origen}} · Resp.: {{cl.ownerS}}</div><span class="pill st-{{cl.etapa}}">{{cl.etapaL}}</span></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn2" onClick="{{say.llamar}}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.phone}}"/></svg>Llamar</button><button class="btn2" onClick="{{say.wa}}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.chat}}"/></svg>WhatsApp</button><button class="btn2" onClick="{{editCl}}">Editar datos</button><button class="btn" onClick="{{addVisitCl}}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.cal}}"/></svg>Agregar visita</button></div></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:12px">
+<div style="background:var(--sub);border-radius:14px;padding:12px 14px"><div class="lbl">Teléfono</div><b>{{cl.tel}}</b></div>
+<div style="background:var(--sub);border-radius:14px;padding:12px 14px"><div class="lbl">Correo</div><b style="overflow-wrap:anywhere">{{cl.mailTxt}}</b></div>
+<div style="background:var(--sub);border-radius:14px;padding:12px 14px"><div class="lbl" style="display:flex;align-items:center;gap:6px"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:14px;height:14px"><path d="{{ic.lock}}"/></svg>Dirección completa · Líder</div><b>{{cl.calle}}</b><div style="color:var(--mut);font-size:13.5px">{{cl.col}}, {{cl.muni}}</div></div></div>
+<div><div class="lbl" style="margin-bottom:4px">Notas</div><div style="color:var(--mut);line-height:1.45">{{noteTxt}}</div></div></div>
+<section class="card" style="padding:16px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><b style="font-size:17px;flex:1">Visitas y demos</b><button class="btn2" onClick="{{addVisitCl}}">+ Agregar visita</button></div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px"><sc-for list="{{clSum}}" as="k" hint-placeholder-count="3"><div style="background:var(--sub);border-radius:14px;padding:10px 12px"><div class="lbl">{{k.k}}</div><b style="font-size:18px">{{k.v}}</b></div></sc-for></div>
+<sc-for list="{{clEvs}}" as="e" hint-placeholder-count="3"><div style="display:flex;gap:12px;align-items:flex-start;padding-top:10px;border-top:1px solid var(--line)"><span class="tile ty {{e.tyCls}}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{e.iconPath}}"/></svg></span><div style="flex:1;min-width:0"><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><b>{{e.lbl}}</b><span class="pill {{e.sCls}}">{{e.status}}</span></div><div style="font-size:13.5px;color:var(--mut)">{{e.when}} · {{e.ownerS}}</div><sc-if value="{{e.hasRes}}" hint-placeholder-val="{{ false }}"><div style="font-size:13.5px;margin-top:2px">Resultado: <b>{{e.resTxt}}</b></div></sc-if></div></div></sc-for>
+<sc-if value="{{clEmpty}}" hint-placeholder-val="{{ false }}"><div style="background:var(--sub);border-radius:14px;padding:16px;text-align:center;color:var(--mut)">Todavía no hay visitas ni demos con este cliente.</div></sc-if>
+</section>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:14px">
+<section class="card" style="padding:16px;display:flex;flex-direction:column;gap:8px"><b>Productos comprados</b><sc-for list="{{clProd}}" as="p" hint-placeholder-count="2"><div style="font-size:14px;font-weight:600">{{p.t}}</div></sc-for><sc-if value="{{noProd}}" hint-placeholder-val="{{ false }}"><span style="color:var(--mut);font-size:14px">Aún sin compras.</span></sc-if></section>
+<section class="card" style="padding:16px;display:flex;flex-direction:column;gap:8px"><b>Referidos que dio</b><sc-for list="{{clRef}}" as="p" hint-placeholder-count="2"><div style="font-size:14px;font-weight:600">{{p.t}}</div></sc-for><sc-if value="{{noRef}}" hint-placeholder-val="{{ false }}"><span style="color:var(--mut);font-size:14px">Todavía no da referidos.</span></sc-if></section></div>
+<section class="card" style="padding:16px;display:flex;flex-direction:column;gap:12px"><b>Actividad</b><sc-for list="{{clTl}}" as="t" hint-placeholder-count="3"><div style="display:flex;gap:12px"><span class="tile" style="width:36px;height:36px;background:var(--sub);color:var(--acctxt)"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{t.path}}"/></svg></span><div><div style="font-weight:700">{{t.t}}</div><div style="font-size:13.5px;color:var(--mut)">{{t.d}}</div><div style="font-size:12px;color:var(--mut)">{{t.w}}</div></div></div></sc-for></section>
+</section></div>
+</sc-if>
+<sc-if value="{{v.demo}}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{dmDone}}" hint-placeholder-val="{{ false }}"><div class="card" style="padding:36px 20px;max-width:560px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px"><span class="tile" style="width:72px;height:72px;border-radius:24px;background:var(--oksoft);color:var(--ok)"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:36px;height:36px"><path d="{{ic.check}}"/></svg></span><h2 style="margin:0;font-size:24px;font-weight:800">¡Demo agendada!</h2><span style="color:var(--mut)">{{doneLine}}</span>
+<sc-if value="{{wa}}" hint-placeholder-val="{{ false }}"><div style="align-self:flex-end;max-width:92%;background:var(--oksoft);border-radius:16px 16px 4px 16px;padding:12px 14px;font-size:14px;line-height:1.45;text-align:left">{{waMsg}}<div style="font-size:11.5px;color:var(--ok);font-weight:700;margin-top:6px">Enviado por WhatsApp</div></div></sc-if>
+<button class="btn" style="background:{{waBg}}" onClick="{{sendWa}}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.chat}}"/></svg>{{waLabel}}</button><button class="btn2" onClick="{{goAgenda}}">Ver en la agenda</button><button class="btn2" onClick="{{again}}">Agendar otra</button></div></sc-if>
+<sc-if value="{{dmForm}}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+<div style="flex:2 1 460px;min-width:0;display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{hasErr}}" hint-placeholder-val="{{ false }}"><div role="alert" style="background:var(--badsoft);color:var(--bad);border-radius:14px;padding:12px 14px;font-weight:700;display:flex;gap:8px;align-items:center"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.alert}}"/></svg>{{dmErr}}</div></sc-if>
+<section class="card" style="padding:20px;display:flex;flex-direction:column;gap:12px"><h2 style="margin:0;font-size:17px;font-weight:800">1 · Cliente</h2>
+<div class="chips"><button class="chip {{segExist}}" onClick="{{dmExisting}}">Buscar cliente</button><button class="chip" onClick="{{dmCreating}}">+ Agregar cliente nuevo</button></div>
+<sc-if value="{{dmSearching}}" hint-placeholder-val="{{ true }}"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:8px"><sc-for list="{{dmClients}}" as="c" hint-placeholder-count="6"><button class="card" onClick="{{c.pickDm}}" style="display:flex;align-items:center;gap:10px;padding:10px 12px;text-align:left;min-height:60px;border:2px solid {{c.border}}"><span class="avatar" style="width:36px;height:36px;font-size:12px">{{c.ini}}</span><span><b style="display:block;font-size:14px">{{c.n}}</b><span style="font-size:12px;color:var(--mut)">{{c.muni}}</span></span></button></sc-for></div></sc-if></section>
+<section class="card" style="padding:20px;display:flex;flex-direction:column;gap:12px"><h2 style="margin:0;font-size:17px;font-weight:800">2 · Dirección</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:12px"><div><label class="lbl" for="d1">Calle y número</label><input id="d1" class="input" value="{{dm.calle}}" onChange="{{onCalle}}"></div><div><label class="lbl" for="d2">Colonia</label><input id="d2" class="input" value="{{dm.col}}" onChange="{{onCol}}"></div></div>
+<div class="chips"><sc-for list="{{dmMunis}}" as="c" hint-placeholder-count="5"><button class="chip {{c.cls}}" aria-pressed="{{c.on}}" onClick="{{c.pick}}">{{c.l}}</button></sc-for></div></section>
+<section class="card" style="padding:20px;display:flex;flex-direction:column;gap:12px"><h2 style="margin:0;font-size:17px;font-weight:800">3 · Cuándo y quién</h2>
+<div class="lbl">Tipo</div><div class="chips"><sc-for list="{{dmTipos}}" as="c" hint-placeholder-count="2"><button class="chip {{c.cls}}" aria-pressed="{{c.on}}" onClick="{{c.pick}}">{{c.l}}</button></sc-for></div>
+<div class="lbl">Promotor asignado</div><div class="chips"><sc-for list="{{dmProms}}" as="c" hint-placeholder-count="5"><button class="chip {{c.cls}}" aria-pressed="{{c.on}}" onClick="{{c.pick}}">{{c.l}}</button></sc-for></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:14px"><div><label class="lbl" for="df">Fecha</label><input id="df" class="input" type="date" min="2026-10-01" max="2026-10-31" value="{{dm.fecha}}" onChange="{{onDmFecha}}"></div><div><label class="lbl" for="dh">Hora</label><input id="dh" class="input" type="time" step="900" value="{{dm.hora}}" onChange="{{onDmHora}}"></div></div></section>
+<section class="card" style="padding:20px;display:flex;flex-direction:column;gap:12px"><h2 style="margin:0;font-size:17px;font-weight:800">4 · Notas</h2><label class="lbl" for="d4">Notas para el equipo</label><textarea id="d4" class="input" placeholder="Invitadas, mascotas, estacionamiento…" onChange="{{onNotas}}">{{dm.notas}}</textarea></section>
+</div>
+<aside class="card" style="flex:1 1 300px;min-width:0;padding:20px;display:flex;flex-direction:column;gap:12px"><b style="font-size:17px">Resumen</b>
+<sc-for list="{{sumRows}}" as="r" hint-placeholder-count="5"><div style="display:flex;gap:10px"><span class="lbl" style="width:84px;padding-top:2px">{{r.k}}</span><span style="flex:1;font-weight:600">{{r.v}}</span></div></sc-for>
+<button class="btn" onClick="{{dmSave}}">Agendar demo</button></aside></div>
+</sc-if>
+</sc-if>
+<sc-if value="{{v.visita}}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+<section class="card" style="flex:2 1 460px;min-width:0;padding:20px;display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{vtHasErr}}" hint-placeholder-val="{{ false }}"><div role="alert" style="background:var(--badsoft);color:var(--bad);border-radius:14px;padding:12px 14px;font-weight:700;display:flex;gap:8px;align-items:center"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.alert}}"/></svg>{{vt.err}}</div></sc-if>
+<div class="chips"><button class="chip {{vtSegA}}" onClick="{{vtModeA}}">Agendar</button><button class="chip {{vtSegH}}" onClick="{{vtModeH}}">Ya la hice</button></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:14px"><div><label class="lbl" for="vc">Cliente</label><select id="vc" class="input" value="{{vtCid}}" onChange="{{onVtCid}}"><sc-for list="{{vtClOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for></select></div><div><label class="lbl" for="vtp">Tipo de visita</label><select id="vtp" class="input" value="{{vt.tipo}}" onChange="{{onVtTipo}}"><sc-for list="{{vtTipoOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for></select></div><div><label class="lbl" for="vf">{{vtFechaL}}</label><input id="vf" class="input" type="date" min="2026-10-01" max="2026-10-31" value="{{vt.fecha}}" onChange="{{onVtFecha}}"></div><div><label class="lbl" for="vh">Hora</label><input id="vh" class="input" type="time" step="900" value="{{vt.hora}}" onChange="{{onVtHora}}"></div></div>
+<sc-if value="{{vtHecha}}" hint-placeholder-val="{{ false }}"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:14px"><div><label class="lbl" for="vr">Resultado</label><select id="vr" class="input" value="{{vt.res}}" onChange="{{onVtRes}}"><sc-for list="{{vtResOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for></select></div><div><label class="lbl" for="vx">Próxima acción</label><select id="vx" class="input" value="{{vt.prox}}" onChange="{{onVtProx}}"><sc-for list="{{vtProxOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for></select></div><div><label class="lbl" for="vs">Fecha de seguimiento</label><input id="vs" class="input" type="date" min="2026-10-01" max="2026-10-31" value="{{vt.seg}}" onChange="{{onVtSeg}}"></div></div></sc-if>
+<div><label class="lbl" for="vn">Notas</label><textarea id="vn" class="input" placeholder="{{vtNotePh}}" onChange="{{onVtNota}}">{{vt.nota}}</textarea></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" onClick="{{saveVisita}}">{{vtSaveLabel}}</button><button class="btn2" onClick="{{vtCancel}}">Cancelar</button></div>
+</section>
+<aside class="card" style="flex:1 1 280px;min-width:0;padding:20px;display:flex;flex-direction:column;gap:12px"><b style="font-size:17px">Resumen</b>
+<sc-for list="{{vtSum}}" as="r" hint-placeholder-count="4"><div style="display:flex;gap:10px"><span class="lbl" style="width:84px;padding-top:2px">{{r.k}}</span><span style="flex:1;font-weight:600">{{r.v}}</span></div></sc-for>
+<button class="btn2" onClick="{{vtNewCl}}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.userplus}}"/></svg>¿No está? Agregar cliente</button></aside>
+</div>
+</sc-if>
+<sc-if value="{{v.clienteForm}}" hint-placeholder-val="{{ false }}">
+<section class="card" style="max-width:760px;padding:20px;display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{cfHasErr}}" hint-placeholder-val="{{ false }}"><div role="alert" style="background:var(--badsoft);color:var(--bad);border-radius:14px;padding:12px 14px;font-weight:700;display:flex;gap:8px;align-items:center"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.alert}}"/></svg>{{cf.err}}</div></sc-if>
+<b style="font-size:17px">Datos personales</b>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:14px"><div><label class="lbl" for="cfn">Nombre completo</label><input id="cfn" class="input" autocomplete="off" placeholder="Ej. Carmen Beltrán Ruiz" value="{{cf.n}}" onChange="{{onCfN}}"></div><div><label class="lbl" for="cft">Teléfono o WhatsApp</label><input id="cft" class="input" inputmode="tel" placeholder="722 000 00 00" value="{{cf.tel}}" onChange="{{onCfTel}}"></div><div><label class="lbl" for="cfm">Correo (opcional)</label><input id="cfm" class="input" type="email" placeholder="nombre@correo.com" value="{{cf.mail}}" onChange="{{onCfMail}}"></div><div><label class="lbl" for="cfo">Origen</label><select id="cfo" class="input" value="{{cf.origen}}" onChange="{{onCfOrig}}"><sc-for list="{{cfOrigOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for></select></div></div>
+<b style="font-size:17px">Dirección</b>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:14px"><div><label class="lbl" for="cfc">Calle y número</label><input id="cfc" class="input" placeholder="Ej. Calle Morelos 118" value="{{cf.calle}}" onChange="{{onCfCalle}}"></div><div><label class="lbl" for="cfl">Colonia o fraccionamiento</label><input id="cfl" class="input"  value="{{cf.col}}" onChange="{{onCfCol}}"></div><div><label class="lbl" for="cfu">Municipio</label><select id="cfu" class="input" value="{{cf.muni}}" onChange="{{onCfMuni}}"><sc-for list="{{cfMuniOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for></select></div></div>
+<div><label class="lbl" for="cfx">Notas</label><textarea id="cfx" class="input" placeholder="Lo que te dijo el cliente, intereses, mejor horario…" onChange="{{onCfNotas}}">{{cf.notas}}</textarea></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" onClick="{{saveCf}}">{{cfSaveLabel}}</button><button class="btn2" onClick="{{cfCancel}}">Cancelar</button></div>
+</section>
+</sc-if>
+<sc-if value="{{v.pipeline}}" hint-placeholder-val="{{ false }}">
+<span style="color:var(--mut)">Arrastra una tarjeta a otra columna para cambiar la etapa del cliente.</span>
+<div class="scrollx"><div style="display:grid;grid-template-columns:repeat(6,minmax(236px,1fr));gap:14px;min-width:1440px;align-items:start">
+<sc-for list="{{cols}}" as="col" hint-placeholder-count="6"><section onDragOver="{{col.over}}" onDrop="{{col.drop}}" aria-label="{{col.l}}" style="background:var(--sub);border-radius:18px;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:360px"><div style="display:flex;align-items:center;gap:8px;padding:2px 4px"><span class="pill st-{{col.id}}">{{col.l}}</span><b style="margin-left:auto">{{col.count}}</b></div>
+<sc-for list="{{col.cards}}" as="c" hint-placeholder-count="2"><button draggable="true" onDragStart="{{c.drag}}" onClick="{{c.open}}" class="card" style="text-align:left;padding:12px;display:flex;flex-direction:column;gap:6px;min-height:84px;width:100%"><span style="display:flex;align-items:center;gap:8px"><span class="avatar" style="width:30px;height:30px;font-size:11px">{{c.ini}}</span><b style="flex:1;font-size:14px">{{c.n}}</b></span><span style="font-size:12.5px;color:var(--mut)">{{c.col}}, {{c.muni}}</span><span style="font-size:12px;color:var(--mut)">{{c.ultTxt}} · {{c.ownerS}}</span></button></sc-for>
+<sc-if value="{{col.empty}}" hint-placeholder-val="{{ false }}"><div style="border:1.5px dashed var(--line);border-radius:14px;padding:18px 10px;text-align:center;color:var(--mut);font-size:13px">Suelta aquí una tarjeta</div></sc-if></section></sc-for>
+</div></div>
+</sc-if>
+<sc-if value="{{v.reportes}}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center"><div class="chips"><sc-for list="{{rpRanges}}" as="k" hint-placeholder-count="2"><button class="chip {{k.cls}}" aria-pressed="{{k.on}}" onClick="{{k.pick}}">{{k.l}}</button></sc-for></div><span style="color:var(--mut);font-size:14px">Toda la red · 9 personas. Toca una fila para ver el detalle.</span><button class="btn2" style="margin-left:auto" onClick="{{exportRp}}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.note}}"/></svg>Exportar CSV</button></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr));gap:16px"><sc-for list="{{rpTotals}}" as="k" hint-placeholder-count="4"><div class="card" style="padding:18px;display:flex;flex-direction:column;gap:6px"><span class="lbl">{{k.l}}</span><span class="big">{{k.v}}</span></div></sc-for></div>
+<div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+<section class="card" style="flex:2 1 600px;min-width:0;padding:8px"><div class="scrollx"><div style="min-width:760px;display:flex;flex-direction:column;gap:2px">
+<div style="display:grid;grid-template-columns:minmax(190px,2.2fr) repeat(6,minmax(78px,1fr));gap:8px;padding:8px 12px;align-items:center"><span class="lbl">Empleado</span><sc-for list="{{rpCols}}" as="c" hint-placeholder-count="6"><button onClick="{{c.pick}}" aria-pressed="{{c.on}}" style="min-height:44px;border:0;background:transparent;text-align:left;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:{{c.color}}">{{c.l}}{{c.arrow}}</button></sc-for></div>
+<sc-for list="{{rpRows}}" as="r" hint-placeholder-count="9"><button onClick="{{r.open}}" aria-pressed="{{r.sel}}" style="display:grid;grid-template-columns:minmax(190px,2.2fr) repeat(6,minmax(78px,1fr));gap:8px;padding:8px 12px;align-items:center;min-height:56px;border:0;border-radius:12px;background:{{r.bg}};text-align:left;width:100%"><span style="display:flex;align-items:center;gap:10px"><span class="avatar" style="width:36px;height:36px;font-size:12px">{{r.ini}}</span><span><b style="display:block;font-size:14px">{{r.n}}</b><span style="font-size:12px;color:var(--mut)">{{r.rol}}</span></span></span><b>{{r.demos}}</b><b>{{r.ventas}}</b><b>{{r.cierre}}</b><b>{{r.monto}}</b><span>{{r.visitas}}</span><span style="display:flex;align-items:center;gap:6px">{{r.prosp}}<sc-if value="{{r.help}}" hint-placeholder-val="{{ false }}"><span class="pill warn">Apoyo</span></sc-if></span></button></sc-for>
+</div></div></section>
+<aside class="card" style="flex:1 1 320px;min-width:0;padding:20px;display:flex;flex-direction:column;gap:14px"><div style="display:flex;align-items:center;gap:12px"><span class="avatar" style="width:56px;height:56px;font-size:19px">{{emp.ini}}</span><div><h2 style="margin:0;font-size:20px;font-weight:800">{{emp.n}}</h2><span style="color:var(--mut);font-size:13.5px">{{emp.rol}} · {{emp.clientes}} clientes</span></div></div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px"><sc-for list="{{empMetrics}}" as="k" hint-placeholder-count="6"><div style="background:var(--sub);border-radius:14px;padding:12px 14px"><div class="lbl">{{k.l}}</div><b style="font-size:{{k.fs}}px;font-variant-numeric:tabular-nums">{{k.v}}</b></div></sc-for></div>
+<b>Demos y shows</b>
+<sc-for list="{{empEvents}}" as="e" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:10px"><span class="tile ty {{e.tyCls}}" style="width:36px;height:36px"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{e.iconPath}}"/></svg></span><span style="flex:1;min-width:0"><b style="display:block;font-size:14px">{{e.who}}</b><span style="font-size:12.5px;color:var(--mut)">Día {{e.day}} · {{e.time}} · {{e.typeL}}</span></span><span class="pill {{e.sCls}}">{{e.status}}</span></div></sc-for>
+<sc-if value="{{empNoEvents}}" hint-placeholder-val="{{ false }}"><span style="color:var(--mut);font-size:14px">Sin demos registradas en este periodo.</span></sc-if>
+<button class="btn" onClick="{{exportRp}}">Exportar reporte de {{emp.s}}</button></aside></div>
+</sc-if>
+<sc-if value="{{v.kpis}}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-wrap:wrap;gap:12px"><div class="chips"><sc-for list="{{kScopes}}" as="k" hint-placeholder-count="3"><button class="chip {{k.cls}}" aria-pressed="{{k.on}}" onClick="{{k.pick}}">{{k.l}}</button></sc-for></div><div class="chips" style="margin-left:auto"><sc-for list="{{kRanges}}" as="k" hint-placeholder-count="2"><button class="chip {{k.cls}}" aria-pressed="{{k.on}}" onClick="{{k.pick}}">{{k.l}}</button></sc-for></div></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr));gap:16px"><sc-for list="{{kCards}}" as="k" hint-placeholder-count="4"><div class="card" style="padding:18px;display:flex;flex-direction:column;gap:6px"><span class="lbl">{{k.l}}</span><span class="big">{{k.v}}</span><span style="font-size:13px;font-weight:700;color:{{k.color}}">{{k.d}}</span></div></sc-for></div>
+<div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
+<section class="card" style="flex:1.4 1 420px;min-width:0;padding:18px;display:flex;flex-direction:column;gap:12px"><div style="display:flex;align-items:center"><b style="flex:1">Actividad por {{kUnit}}</b><span style="font-size:12.5px;color:var(--mut);display:flex;gap:12px"><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:3px;background:var(--acc)"></span>Demos</span><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:3px;background:var(--mut);opacity:.55"></span>Visitas</span></span></div>
+<div style="display:flex;align-items:flex-end;gap:14px;height:190px"><sc-for list="{{bars6}}" as="b" hint-placeholder-count="6"><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;justify-content:flex-end;height:100%"><div style="display:flex;align-items:flex-end;gap:5px;height:160px"><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:2px"><span style="font-size:11px;font-weight:700">{{b.dv}}</span><div style="width:22px;height:{{b.dh}}px;background:var(--acc);border-radius:5px 5px 0 0"></div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:2px"><span style="font-size:11px;color:var(--mut)">{{b.vv}}</span><div style="width:22px;height:{{b.vh}}px;background:var(--mut);opacity:.55;border-radius:5px 5px 0 0"></div></div></div><span style="font-size:12px;color:var(--mut);font-weight:600">{{b.lab}}</span></div></sc-for></div></section>
+<section class="card" style="flex:1 1 320px;min-width:0;padding:18px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center"><b style="flex:1">Ventas y reclutas</b><span style="font-size:12.5px;color:var(--mut)"><b style="color:var(--acctxt)">— Ventas</b> &nbsp; <b>- - Reclutas</b></span></div>
+<svg viewBox="0 0 340 130" style="width:100%;height:170px" role="img" aria-label="Ventas y reclutas en el tiempo"><line x1="8" y1="120" x2="332" y2="120" stroke="var(--line)"/><polyline points="{{lineV}}" fill="none" stroke="var(--acc)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><polyline points="{{lineR}}" fill="none" stroke="var(--mut)" stroke-width="2.5" stroke-dasharray="5 5" stroke-linecap="round"/></svg>
+<div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--mut);font-weight:600"><sc-for list="{{bars6}}" as="b" hint-placeholder-count="6"><span>{{b.lab}}</span></sc-for></div></section></div>
+<div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
+<section class="card" style="flex:1.4 1 420px;min-width:0;padding:18px;display:flex;flex-direction:column;gap:8px"><b>Leaderboard · ventas del {{kUnit}}</b>
+<sc-for list="{{lbRows}}" as="r" hint-placeholder-count="9"><div style="display:flex;align-items:center;gap:12px;min-height:44px"><b style="width:22px;color:var(--mut)">{{r.pos}}</b><span style="width:140px;font-weight:700;font-size:14px">{{r.n}}</span><div style="flex:1;height:12px;background:var(--sub);border-radius:6px"><div style="width:{{r.w}}%;height:12px;background:var(--acc);border-radius:6px"></div></div><b style="width:28px;text-align:right;font-variant-numeric:tabular-nums">{{r.v}}</b></div></sc-for></section>
+<sc-if value="{{kHelp}}" hint-placeholder-val="{{ true }}"><section class="card" style="flex:1 1 320px;min-width:0;padding:18px;display:flex;flex-direction:column;gap:10px;background:var(--warnsoft);border-color:transparent"><div style="display:flex;align-items:center;gap:8px;color:var(--warn);font-weight:800"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.alert}}"/></svg>Necesitan apoyo</div>
+<sc-for list="{{helpList}}" as="r" hint-placeholder-count="3"><div style="background:var(--card);border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px"><span style="flex:1"><b style="display:block;font-size:14px">{{r.n}}</b><span style="font-size:12.5px;color:var(--mut)">{{r.why}}</span></span><button class="btn2" style="min-height:44px;padding:0 12px;font-size:13px" onClick="{{r.act}}">Acompañar</button></div></sc-for></section></sc-if></div>
+</sc-if>
+</div>
+</main>
+</sc-if>
+<sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}"><div role="status" style="position:fixed;right:24px;bottom:24px;z-index:30;background:var(--ink);color:var(--bg);border-radius:14px;padding:14px 18px;font-weight:700;font-size:14px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 24px rgba(0,0,0,.3)"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.check}}"/></svg>{{toast}}</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"tema":{"editor":"enum","default":"claro","options":["claro","oscuro"],"section":"Tema"},"acento":{"editor":"enum","default":"azul","options":["azul","celeste"],"section":"Tema"},"$preview":{"width":1440,"height":900}}'>
+const IC = {
+  home: 'M3 11.5 12 4l9 7.5M5.5 10v9.5h13V10M10 19.5v-5h4v5',
+  cal: 'M4 6.5h16V20H4zM4 10.5h16M8 3.5v4M16 3.5v4',
+  users: 'M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM2.5 20c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5M16 4.3a3.5 3.5 0 0 1 0 6.4M18 14.8c2 .7 3.5 2.3 3.5 5.2',
+  chart: 'M3.5 20.5h17M6.5 17v-5M12 17V6M17.5 17v-8',
+  plus: 'M12 5v14M5 12h14',
+  phone: 'M6.6 3.5 9.2 3l1.7 4.2-1.9 1.5a11 11 0 0 0 5.3 5.3l1.5-1.9 4.2 1.7-.5 2.6A2.5 2.5 0 0 1 17 18.3 14.3 14.3 0 0 1 5.7 7 2.5 2.5 0 0 1 6.6 3.5z',
+  chat: 'M4 20l1.3-4.2A8 8 0 1 1 8.3 19L4 20z',
+  search: 'M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM20.5 20.5 16 16',
+  check: 'M5 12.5l4.5 4.5L19 7.5',
+  bell: 'M6 17V11a6 6 0 1 1 12 0v6l1.5 2h-15zM10 21h4',
+  pin: 'M12 21s6.5-5.8 6.5-11a6.5 6.5 0 1 0-13 0c0 5.2 6.5 11 6.5 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z',
+  lock: 'M6 11h12v9H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3',
+  board: 'M4 5h4.5v14H4zM9.8 5h4.4v9H9.8zM15.5 5H20v6h-4.5z',
+  userplus: 'M10 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 20c0-3.3 3-5.5 7-5.5M18 9v6M15 12h6',
+  star: 'M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.8 6.8 19.6l1-5.8L3.5 9.7l5.9-.8z',
+  alert: 'M12 4 2.5 20h19zM12 10v4.5M12 17.5v.01',
+  box: 'M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5zM3.5 7.5 12 12l8.5-4.5M12 12v9',
+  repeat: 'M4 12a8 8 0 0 1 14-5.3L20 9M20 4v5h-5M20 12a8 8 0 0 1-14 5.3L4 15M4 20v-5h5',
+  money: 'M12 3v18M16.5 7.5C16 6 14.3 5 12 5 9.5 5 8 6.2 8 8s1.5 2.5 4 3 4 1.2 4 3-1.5 3-4 3c-2.3 0-4-1-4.5-2.5',
+  note: 'M5 3.5h10l4 4V20.5H5zM14.5 3.5v4h4M8.5 12h7M8.5 16h5'
+};
+IC.demo = IC.box; IC.out = 'M9 4H5v16h4M16 8l4 4-4 4M20 12H9';
+const TYPE_L = { visita: 'Visita', demo: 'Demo en casa', show: 'Show de ventas', recl: 'Reclutamiento', seg: 'Seguimiento' };
+const TYPE_ICON = { visita: 'pin', demo: 'box', show: 'star', recl: 'userplus', seg: 'repeat' };
+const STAGES = [['prospecto', 'Prospecto'], ['cita', 'Cita agendada'], ['demo', 'Demo realizada'], ['seg', 'En seguimiento'], ['cerrada', 'Venta cerrada'], ['nov', 'No venta']];
+const STAGE_L = {}; STAGES.forEach(s => { STAGE_L[s[0]] = s[1]; });
+const PEOPLE = {
+  rosa: { n: 'Rosa Elena Vargas', s: 'Rosa Elena', rol: 'Líder de Territorio', ini: 'RV' },
+  marco: { n: 'Marco Antonio Peña', s: 'Marco', rol: 'Distribuidor JR', ini: 'MP' },
+  dani: { n: 'Daniela Cortés', s: 'Daniela', rol: 'Distribuidora JR', ini: 'DC' },
+  karen: { n: 'Karen Sandoval', s: 'Karen', rol: 'Emprendedora', ini: 'KS' },
+  luis: { n: 'Luis Fernando Ayala', s: 'Luis', rol: 'Emprendedor', ini: 'LA' },
+  jorge: { n: 'Jorge Ruiz', s: 'Jorge', rol: 'Promotor', ini: 'JR' },
+  paola: { n: 'Paola Montes', s: 'Paola', rol: 'Promotora', ini: 'PM' },
+  ivan: { n: 'Iván Granados', s: 'Iván', rol: 'Promotor', ini: 'IG' },
+  ale: { n: 'Alejandra Treviño', s: 'Alejandra', rol: 'Promotora', ini: 'AT' }
+};
+const EMP = ['rosa', 'marco', 'dani', 'karen', 'luis', 'jorge', 'paola', 'ivan', 'ale'];
+const ADMIN = { n: 'Andrea Robles', s: 'Andrea', rol: 'Administradora', ini: 'AR' };
+const ROLES = { promotor: { me: 'karen', owners: ['karen'] }, jr: { me: 'marco', owners: ['marco', 'karen', 'luis'] }, lider: { me: 'rosa', owners: EMP }, admin: { me: 'admin', owners: EMP } };
+const ACCOUNTS = [
+  { k: 'promotor', l: 'Vendedor · Emprendedor', d: 'Ve sus propios clientes, visitas y demos', mail: 'karen.sandoval@rp-crm.example', ini: 'KS' },
+  { k: 'jr', l: 'Distribuidor JR', d: 'Ve a su equipo directo', mail: 'marco.pena@rp-crm.example', ini: 'MP' },
+  { k: 'lider', l: 'Líder de Territorio', d: 'Ve su compañía; asigna cerradores', mail: 'rosa.vargas@rp-crm.example', ini: 'RV' },
+  { k: 'admin', l: 'Administrador', d: 'Reportes por empleado y toda la red', mail: 'andrea.robles@rp-crm.example', ini: 'AR' }
+];
+const STATS = {
+  semana: { rosa: [2, 3, 0, 0, 1, 0], marco: [3, 6, 1, 31000, 3, 1], dani: [4, 8, 1, 29500, 4, 0], karen: [6, 11, 2, 56380, 5, 1], luis: [3, 5, 1, 24500, 3, 0], jorge: [5, 7, 1, 33000, 3, 0], paola: [5, 9, 2, 61000, 4, 1], ivan: [3, 5, 1, 21500, 3, 0], ale: [0, 2, 0, 0, 0, 0] },
+  mes: { rosa: [6, 12, 1, 38000, 4, 1], marco: [14, 28, 4, 112000, 9, 2], dani: [20, 35, 5, 141000, 12, 2], karen: [21, 43, 7, 214500, 19, 2], luis: [13, 26, 3, 86000, 10, 1], jorge: [17, 30, 4, 118000, 11, 1], paola: [22, 38, 6, 187000, 14, 2], ivan: [15, 24, 3, 79000, 10, 0], ale: [9, 16, 2, 44000, 8, 1] }
+};
+const ini = n => n.split(' ').filter(Boolean).slice(0, 2).map(x => x[0]).join('').toUpperCase();
+const mxn = n => '$' + Math.round(n).toLocaleString('es-MX');
+const CLIENTS = [
+  { id: 'c1', n: 'Patricia Gómez Landa', muni: 'Metepec', col: 'Col. Bellavista', calle: 'Av. Benito Juárez 214', tel: '722 345 18 62', etapa: 'demo', origen: 'Referido', ult: 0, owner: 'karen', notas: 'Le encantó la vaporera. Su esposo decide la compra; llamar después de las 6 p. m.', prod: [], ref: ['Lucía Landa (hermana)'], tl: [['demo', 'Demo en casa realizada', 'Presentó Set Gourmet 12 pzas. Pidió cotización con financiamiento.', 'Hoy · 9:00 a. m.'], ['chat', 'Recordatorio por WhatsApp', 'Confirmó asistencia con su esposo.', 'Ayer · 6:10 p. m.'], ['pin', 'Cita agendada', 'Demo en casa, jueves 9:00 a. m.', 'Lun 5 oct.'], ['userplus', 'Prospecto creado', 'Referida por Lucía Landa.', '28 sep.']] },
+  { id: 'c2', n: 'Laura Hernández Rojas', muni: 'Toluca', col: 'Col. Las Américas', calle: 'Calle Morelos 118', tel: '722 210 47 35', etapa: 'cita', origen: 'Facebook', ult: 1, owner: 'karen', notas: 'Familia de 5. Cocina diario; interés en sartenes y vaporera.', prod: [], ref: [], tl: [['chat', 'Confirmó cita por WhatsApp', 'Demo mañana 5:00 p. m. en su casa.', 'Ayer · 7:45 p. m.'], ['userplus', 'Prospecto creado', 'Llegó por anuncio de Facebook.', '2 oct.']] },
+  { id: 'c3', n: 'Gabriela Moreno Fuentes', muni: 'Metepec', col: 'Fracc. Rancho San Lucas', calle: 'Priv. Los Pinos 9', tel: '722 876 20 14', etapa: 'cita', origen: 'Referido', ult: 2, owner: 'karen', notas: 'Invitará a dos vecinas a la demo.', prod: [], ref: [], tl: [['pin', 'Demo programada hoy', 'Cerrador asignado: Marco Peña.', 'Hoy · 6:30 p. m.'], ['userplus', 'Prospecto creado', 'Referida por Verónica Lozano.', '30 sep.']] },
+  { id: 'c4', n: 'Alberto Cisneros Peña', muni: 'Toluca', col: 'Col. Universidad', calle: 'Calle Vicente Guerrero 305', tel: '722 154 90 63', etapa: 'prospecto', origen: 'Evento', ult: 6, owner: 'luis', notas: '', prod: [], ref: [], tl: [['userplus', 'Prospecto creado', 'Lo conocimos en la expo de hogar.', 'Hace 6 d']] },
+  { id: 'c5', n: 'Elizabeth Domínguez', muni: 'Toluca', col: 'Col. Sánchez Colín', calle: 'Av. Hidalgo 77', tel: '722 400 12 08', etapa: 'nov', origen: 'Referido', ult: 12, owner: 'karen', notas: 'No era buen momento económico. Retomar en enero.', prod: [], ref: [], tl: [['demo', 'Demo sin venta', 'Le pareció caro; pidió contactarla en 3 meses.', '26 sep.']] },
+  { id: 'c6', n: 'Fernando Ibarra Solís', muni: 'Metepec', col: 'Col. La Providencia', calle: 'Calle Las Flores 52', tel: '722 678 33 91', etapa: 'seg', origen: 'Referido', ult: 3, owner: 'karen', notas: 'Compara con otra marca. Prometí cotización de financiamiento.', prod: [], ref: [], tl: [['demo', 'Demo en casa realizada', 'Set Clásico 7 pzas.', '1 oct.']] },
+  { id: 'c7', n: 'Mariana Cuevas Ortiz', muni: 'CDMX', col: 'Col. Narvarte Poniente', calle: 'Eje 4 Sur 240', tel: '55 4821 7730', etapa: 'prospecto', origen: 'WhatsApp', ult: 2, owner: 'ivan', notas: '', prod: [], ref: [], tl: [['chat', 'Primer contacto', 'Escribió por WhatsApp.', 'Hace 2 d']] },
+  { id: 'c8', n: 'Roberto Salinas Garza', muni: 'Monterrey', col: 'Col. Cumbres 2.º Sector', calle: 'Av. Lincoln 1840', tel: '81 1234 5567', etapa: 'seg', origen: 'Evento', ult: 4, owner: 'paola', notas: '', prod: [], ref: [], tl: [['demo', 'Demo realizada', 'Quedó pendiente la decisión.', 'Hace 4 d']] },
+  { id: 'c9', n: 'José Luis Barragán', muni: 'Guadalajara', col: 'Col. Providencia', calle: 'Av. Acueducto 680', tel: '33 3811 2290', etapa: 'cerrada', origen: 'Referido', ult: 9, owner: 'jorge', notas: '', prod: ['Set Clásico 7 pzas · $18,900'], ref: [], tl: [['money', 'Venta cerrada', 'Pago con tarjeta a 12 meses.', 'Hace 9 d']] },
+  { id: 'c10', n: 'Sofía Arriaga Pineda', muni: 'CDMX', col: 'Col. Del Valle Centro', calle: 'Calle Gabriel Mancera 1120', tel: '55 3302 9914', etapa: 'cita', origen: 'Facebook', ult: 1, owner: 'dani', notas: '', prod: [], ref: [], tl: [['pin', 'Cita agendada', 'Demo mañana 12:00 p. m.', 'Ayer']] },
+  { id: 'c11', n: 'Verónica Lozano Aguilar', muni: 'Toluca', col: 'Col. Ciprés', calle: 'Calle Pino Suárez 410', tel: '722 509 66 14', etapa: 'cerrada', origen: 'Referido', ult: 5, owner: 'karen', notas: 'Clienta feliz; organizará un show de ventas con amigas.', prod: ['Set Gourmet 12 pzas · $32,500', 'Vaporera triple · $4,980'], ref: ['Gabriela Moreno', 'Fernando Ibarra'], tl: [['money', 'Venta cerrada · $37,480', 'Financiamiento a 12 meses.', 'Mar 6 oct.'], ['demo', 'Demo en casa', 'Duración 2 h. Dos invitadas.', 'Mar 6 oct.']] },
+  { id: 'c12', n: 'Hugo Valdés Treviño', muni: 'Monterrey', col: 'Col. Mitras Centro', calle: 'Calle Padre Mier 2230', tel: '81 8090 4412', etapa: 'prospecto', origen: 'WhatsApp', ult: 7, owner: 'ale', notas: '', prod: [], ref: [], tl: [['chat', 'Primer contacto', 'Pidió información.', 'Hace 7 d']] },
+  { id: 'c13', n: 'Beatriz Salgado Ruiz', muni: 'Metepec', col: 'Rancho La Mora', calle: 'Paseo de la Asunción 301', tel: '722 741 08 25', etapa: 'prospecto', origen: 'Evento', ult: 1, owner: 'karen', notas: 'Recién se mudó; está equipando su cocina.', prod: [], ref: [], tl: [['pin', 'Visita programada', 'Hoy 1:30 p. m.', 'Hoy']] },
+  { id: 'c14', n: 'Ricardo Téllez Mata', muni: 'Toluca', col: 'Col. Seminario', calle: 'Calle Ignacio Rayón 156', tel: '722 332 71 40', etapa: 'cita', origen: 'Facebook', ult: 1, owner: 'karen', notas: '', prod: [], ref: [], tl: [['demo', 'Demo en casa (sin cierre)', 'Falta registrar el resultado.', 'Ayer · 6:00 p. m.']] }
+];
+const EVENTS = [
+  { id: 'e5', day: 7, time: '18:00', end: '20:00', type: 'demo', cid: 'c14', sub: 'Ricardo Téllez · Col. Seminario, Toluca', owner: 'karen' },
+  { id: 'e6', day: 8, time: '09:00', end: '11:00', type: 'demo', cid: 'c1', sub: 'Patricia Gómez · Col. Bellavista, Metepec', owner: 'karen' },
+  { id: 'e13', day: 8, time: '10:00', end: '10:45', type: 'visita', cid: 'c4', sub: 'Alberto Cisneros · Col. Universidad, Toluca', owner: 'luis' },
+  { id: 'e7', day: 8, time: '11:30', end: '11:50', type: 'seg', cid: 'c6', sub: 'Fernando Ibarra · Metepec', owner: 'karen' },
+  { id: 'e8', day: 8, time: '13:30', end: '14:15', type: 'visita', cid: 'c13', sub: 'Beatriz Salgado · Rancho La Mora, Metepec', owner: 'karen' },
+  { id: 'e16', day: 8, time: '17:30', end: '18:15', type: 'visita', cid: 'c7', sub: 'Mariana Cuevas · Narvarte, CDMX', owner: 'ivan' },
+  { id: 'e9', day: 8, time: '18:30', end: '20:30', type: 'demo', cid: 'c3', sub: 'Gabriela Moreno · Rancho San Lucas, Metepec', owner: 'karen' },
+  { id: 'e15', day: 8, time: '19:00', end: '21:00', type: 'show', cid: 'c8', sub: 'Roberto Salinas · Cumbres, Monterrey', owner: 'paola' },
+  { id: 'e14', day: 9, time: '11:00', end: '13:00', type: 'demo', cid: 'c4', sub: 'Alberto Cisneros · Col. Universidad, Toluca', owner: 'luis' },
+  { id: 'e18', day: 9, time: '12:00', end: '14:00', type: 'demo', cid: 'c10', sub: 'Sofía Arriaga · Del Valle, CDMX', owner: 'dani' },
+  { id: 'e10', day: 9, time: '17:00', end: '19:00', type: 'demo', cid: 'c2', sub: 'Laura Hernández · Col. Las Américas, Toluca', owner: 'karen' },
+  { id: 'e17', day: 9, time: '18:30', end: '20:30', type: 'demo', cid: 'c12', sub: 'Hugo Valdés · Mitras Centro, Monterrey', owner: 'ale' },
+  { id: 'e11', day: 10, time: '12:00', end: '14:30', type: 'show', cid: 'c11', sub: 'Casa de Verónica Lozano · Toluca', owner: 'karen' },
+  { id: 'e12', day: 10, time: '16:00', end: '17:30', type: 'recl', cid: null, sub: 'Julio César Mora · Toluca', owner: 'karen' },
+  { id: 'e19', day: 10, time: '11:00', end: '13:30', type: 'show', cid: 'c4', sub: 'Casa Cisneros · Toluca', owner: 'marco' }
+];
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { view: 'login', role: 'promotor', loginRole: 'promotor', loginEmail: 'karen.sandoval@rp-crm.example', loginPass: 'demo1234', loginErr: '', rEmp: null, rpRange: 'mes', rpSort: 'ventas', dark: null, acc: null, toast: '', cid: 'c1', aDay: 8, aProm: 'todos', q: '', fEtapa: 'todas', stages: {}, cierres: {}, kRange: 'mes', kScope: 'territorio', dm: { cid: 'c2', creating: false, newName: '', calle: 'Calle Morelos 118', col: 'Col. Las Américas', muni: 'Toluca', tipo: 'demo', prom: 'karen', fecha: '2026-10-09', hora: '17:30', notas: '' }, dmDone: false, newEv: [], wa: false, newCl: [], cEdits: {}, vt: { cid: null, tipo: 'seg', mode: 'agendar', fecha: '2026-10-09', hora: '10:00', res: 'Interesado', prox: 'Llamar', seg: '2026-10-12', nota: '', from: '', err: '' }, cf: { id: null, n: '', tel: '', mail: '', origen: 'Referido', calle: '', col: '', muni: 'Toluca', notas: '', from: '', err: '' } };
+  }
+  _say(m) { this.setState({ toast: m }); clearTimeout(this._tt); this._tt = setTimeout(() => this.setState({ toast: '' }), 2400); }
+  _in(k, p) { this.setState({ [k]: { ...this.state[k], ...p } }); }
+  renderVals() {
+    const V = {};
+    const st = this.state;
+    const role = ROLES[st.role], owners = role.owners, isAdm = st.role === 'admin', me = isAdm ? ADMIN : PEOPLE[role.me];
+    V.me = me; V.showApp = st.view !== 'login';
+    const dark = st.dark === null ? this.props.tema === 'oscuro' : st.dark;
+    const accN = st.acc === null ? (this.props.acento === 'celeste' ? 'celeste' : 'azul') : st.acc;
+    V.themeCls = dark ? 'dark' : ''; V.accCls = accN === 'celeste' ? 'celeste' : '';
+    V.ic = IC; V.toast = st.toast; V.hasToast = !!st.toast;
+    const go = (v, x) => () => this.setState({ view: v, dmDone: false, ...(x || {}) });
+    const say = m => () => this._say(m);
+    const DNs = ['lun', 'mar', 'mié', 'jue', 'vie', 'sáb', 'dom'];
+    const iso = d => '2026-10-' + String(d).padStart(2, '0');
+    const fmtD = f => { if (!f || f.slice(0, 7) !== '2026-10') return f || ''; const d = +f.slice(8, 10); return DNs[(d + 2) % 7] + ' ' + d + ' oct'; };
+    const opts = (arr, cur) => arr.map(o => ({ v: o[0], l: o[1], sel: cur === o[0] }));
+    const freshVt = (cid, tipo, from) => ({ cid: cid || null, tipo: tipo || 'seg', mode: 'agendar', fecha: '2026-10-09', hora: '10:00', res: 'Interesado', prox: 'Llamar', seg: '2026-10-12', nota: '', from: from || '', err: '' });
+    const freshCf = (c, from) => c ? { id: c.id, n: c.n, tel: c.tel === '—' ? '' : c.tel, mail: c.mail || '', origen: c.origen, calle: c.calle || '', col: c.col, muni: c.muni, notas: c.notas || '', from: '', err: '' } : { id: null, n: '', tel: '', mail: '', origen: 'Referido', calle: '', col: '', muni: 'Toluca', notas: '', from: from || '', err: '' };
+    V.say = { bell: say('Tienes 4 recordatorios: abre la app móvil para atenderlos') };
+    V.q = st.q; V.onQ = e => this.setState({ q: e.target.value, view: e.target.value ? 'clientes' : st.view });
+    V.themeOpts = [['claro', 'Claro'], ['oscuro', 'Oscuro']].map(t => ({ l: t[1], on: (t[0] === 'oscuro') === dark, cls: (t[0] === 'oscuro') === dark ? 'on' : '', pick: () => this.setState({ dark: t[0] === 'oscuro' }) }));
+    const NAVS = [['inicio', 'Inicio', 'home'], ['agenda', 'Agenda', 'cal'], ['clientes', 'Clientes', 'users'], ['demo', 'Nueva demo', 'box'], ['pipeline', 'Pipeline', 'board'], ['kpis', 'KPIs', 'chart']].map(n => n[0] === 'kpis' && isAdm ? ['reportes', 'Reportes', 'chart'] : n);
+    V.navItems = NAVS.map(n => ({ l: n[1], path: IC[n[2]], on: st.view === n[0], cls: st.view === n[0] ? 'on' : '', go: go(n[0]) }));
+    V.moreItems = [{ l: 'Reclutamiento', path: IC.userplus }, { l: 'Equipo', path: IC.users }, { l: 'Notificaciones', path: IC.bell }];
+    V.title = { inicio: 'Buenos días, ' + me.s, agenda: 'Agenda', reportes: 'Reportes por empleado', clientes: 'Clientes y prospectos', demo: 'Nueva demo', pipeline: 'Pipeline', kpis: 'KPIs y estadísticas' }[st.view];
+    V.newDemo = go('demo');
+    V.v = {}; NAVS.forEach(n => { V.v[n[0]] = st.view === n[0]; });
+    const stageOf = c => st.stages[c.id] || c.etapa;
+    const CL = CLIENTS.concat(st.newCl).map(c => st.cEdits[c.id] ? { ...c, ...st.cEdits[c.id] } : c).filter(c => owners.includes(c.owner)).map(c => ({ ...c, etapa: stageOf(c), etapaL: STAGE_L[stageOf(c)], ini: ini(c.n), ownerS: PEOPLE[c.owner].s, ultTxt: c.ult === 0 ? 'Hoy' : c.ult === 1 ? 'Ayer' : 'Hace ' + c.ult + ' d' }));
+    const NOW = 12 * 60 + 10, mins = t => +t.slice(0, 2) * 60 + +t.slice(3);
+    const evAll = EVENTS.concat(st.newEv);
+    const EV = evAll.filter(e => owners.includes(e.owner)).map(e => { const past = !!e.hecha || e.day < 8 || (e.day === 8 && mins(e.time) < NOW), pend = past && !e.hecha && (e.type === 'demo' || e.type === 'show') && !st.cierres[e.id]; return { ...e, tyCls: 'ty-' + e.type, typeL: e.lbl || TYPE_L[e.type], iconPath: IC[TYPE_ICON[e.type]], ownerS: PEOPLE[e.owner].s, past, pend, status: pend ? 'Cierre pendiente' : e.hecha ? 'Realizada' : past ? 'Completado' : 'Próxima', sCls: pend ? 'warn' : past ? '' : 'ok', who: e.sub.split(' · ')[0], open: e.cid ? go('clientes', { cid: e.cid }) : say('Abre Reclutamiento en la app móvil') }; }).sort((a, b) => a.day - b.day || a.time.localeCompare(b.time));
+    V.say.llamar = say('Llamando…'); V.say.wa = say('Abriendo WhatsApp…');
+    // Inicio
+    V.kpiCards = [['Demos', '31', '+4 vs sem. pasada', 'var(--ok)'], ['Ventas', '9', '−1 vs sem. pasada', 'var(--bad)'], ['% de cierre', '29%', 'Meta: 30%', 'var(--mut)'], ['Prospectos nuevos', '26', '+1 vs sem. pasada', 'var(--ok)']].map(k => ({ l: k[0], v: k[1], d: k[2], color: k[3] }));
+    const KMD = { promotor: [['Demos', '6', '+1 vs sem. pasada', 'var(--ok)'], ['Ventas', '2', '+1 vs sem. pasada', 'var(--ok)'], ['% de cierre', '33%', 'Equipo: 27%', 'var(--mut)'], ['Prospectos nuevos', '5', '+2 vs sem. pasada', 'var(--ok)']], jr: [['Demos', '14', '+2 vs sem. pasada', 'var(--ok)'], ['Ventas', '4', 'Igual que antes', 'var(--mut)'], ['% de cierre', '29%', 'Territorio: 27%', 'var(--mut)'], ['Prospectos nuevos', '12', '+3 vs sem. pasada', 'var(--ok)']] };
+    if (KMD[st.role]) V.kpiCards = KMD[st.role].map(k => ({ l: k[0], v: k[1], d: k[2], color: k[3] }));
+    V.goAgenda = go('agenda');
+    V.todayEvs = EV.filter(e => e.day === 8);
+    const closeFor = e => go('clientes', { cid: e.cid, cierres: { ...st.cierres, [e.id]: 'visto' } });
+    const pends = EV.filter(e => e.pend);
+    V.pendCount = pends.length;
+    V.pendList = pends.map(e => ({ who: e.who, ownerS: e.ownerS, when: (e.day === 8 ? 'Hoy ' : 'Ayer ') + e.time, close: () => { this.setState({ cierres: { ...st.cierres, [e.id]: 'ok' } }); this._say('Cierre registrado · ' + e.who); } }));
+    // Agenda
+    const prom = st.aProm;
+    V.promChips = [['todos', 'Todos']].concat(owners.slice(0, 5).map(o => [o, PEOPLE[o].s])).map(c => ({ l: c[1], on: prom === c[0], cls: prom === c[0] ? 'on' : '', pick: () => this.setState({ aProm: c[0] }) }));
+    V.legend = Object.keys(TYPE_L).map(k => ({ l: TYPE_L[k], tyCls: 'ty-' + k }));
+    const dn = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+    V.weekCols = [5, 6, 7, 8, 9, 10, 11].map((d, i) => { const evs = EV.filter(e => e.day === d && (prom === 'todos' || e.owner === prom)); const td = d === 8; return { num: d, lbl: dn[i], evs, empty: evs.length === 0, count: evs.length ? evs.length + ' eventos' : '', bg: td ? 'var(--acc)' : 'var(--card)', fg: td ? 'var(--onacc)' : 'var(--ink)' }; });
+    // Clientes
+    const qn = st.q.trim().toLowerCase();
+    V.etapaChips = [['todas', 'Todas']].concat(STAGES).map(o => ({ l: o[1], n: o[0] === 'todas' ? CL.length : CL.filter(c => c.etapa === o[0]).length, on: st.fEtapa === o[0], cls: st.fEtapa === o[0] ? 'on' : '', pick: () => this.setState({ fEtapa: o[0] }) }));
+    V.clientList = CL.filter(c => (st.fEtapa === 'todas' || c.etapa === st.fEtapa) && (!qn || (c.n + ' ' + c.col + ' ' + c.muni).toLowerCase().includes(qn))).map(c => ({ ...c, border: c.id === st.cid ? 'var(--acc)' : 'var(--line)', pick: () => this.setState({ cid: c.id }) }));
+    V.clientsEmpty = V.clientList.length === 0;
+    V.clearQ = () => this.setState({ q: '', fEtapa: 'todas' });
+    const cl = CL.find(c => c.id === st.cid) || CL[0];
+    V.cl = { ...cl, mailTxt: cl.mail || 'Sin correo' }; V.noteTxt = cl.notas || 'Sin notas todavía.';
+    V.clProd = cl.prod.map(t => ({ t })); V.noProd = cl.prod.length === 0; V.clRef = cl.ref.map(t => ({ t })); V.noRef = cl.ref.length === 0;
+    V.clTl = cl.tl.map(t => ({ path: IC[t[0]] || IC.note, t: t[1], d: t[2], w: t[3] }));
+    V.addClient = () => this.setState({ view: 'clienteForm', cf: freshCf(null), dmDone: false });
+    V.editCl = () => this.setState({ view: 'clienteForm', cf: freshCf(cl), dmDone: false });
+    V.addVisit = () => this.setState({ view: 'visita', vt: freshVt(null, 'seg', ''), dmDone: false });
+    V.addVisitCl = () => this.setState({ view: 'visita', vt: freshVt(cl.id, ['prospecto', 'cita'].includes(cl.etapa) ? 'demo' : 'seg', 'cliente'), dmDone: false });
+    const CIR = { venta: 'Venta cerrada', sin: 'Sin venta', reag: 'Reagendar', seg: 'Seguimiento' };
+    const clEvAll = evAll.filter(e => e.cid === cl.id).map(e => EV.find(x => x.id === e.id)).filter(Boolean).sort((a, b) => b.day - a.day || b.time.localeCompare(a.time));
+    V.clEvs = clEvAll.map(e => ({ ...e, lbl: e.typeL, when: DNs[(e.day + 2) % 7] + ' ' + e.day + ' oct · ' + e.time, resTxt: e.res || CIR[st.cierres[e.id]] || '', hasRes: !!(e.res || CIR[st.cierres[e.id]]) }));
+    V.clEmpty = clEvAll.length === 0;
+    const nDemo = clEvAll.filter(e => e.type === 'demo' || e.type === 'show').length, nextEv = clEvAll.slice().reverse().find(e => !e.past);
+    V.clSum = [{ k: 'Demos y shows', v: String(nDemo) }, { k: 'Otras visitas', v: String(clEvAll.length - nDemo) }, { k: 'Próxima', v: nextEv ? fmtD(iso(nextEv.day)) : 'Ninguna' }];
+    // Nueva demo
+    const dm = st.dm; V.dm = dm;
+    const setDm = p => this._in('dm', p);
+    const chipsOf = (arr, cur, key) => arr.map(o => ({ l: o[1], on: cur === o[0], cls: cur === o[0] ? 'on' : '', pick: () => setDm({ [key]: o[0] }) }));
+    V.dmDone = st.dmDone; V.dmForm = !st.dmDone;
+    V.hasErr = !!st.dmErr; V.dmErr = st.dmErr || '';
+    V.segExist = dm.creating ? '' : 'on'; V.segNew = dm.creating ? 'on' : '';
+    V.dmExisting = () => setDm({ creating: false }); V.dmCreating = () => this.setState({ view: 'clienteForm', cf: freshCf(null, 'demo'), dmDone: false });
+    V.dmSearching = !dm.creating;
+    V.dmClients = CL.slice(0, 8).map(c => ({ ...c, border: dm.cid === c.id ? 'var(--acc)' : 'var(--line)', pickDm: () => { setDm({ cid: c.id, creating: false, calle: c.calle, col: c.col, muni: c.muni }); this.setState({ dmErr: '' }); } }));
+    V.onNewName = e => setDm({ newName: e.target.value }); V.onCalle = e => setDm({ calle: e.target.value }); V.onCol = e => setDm({ col: e.target.value }); V.onNotas = e => setDm({ notas: e.target.value });
+    V.dmMunis = chipsOf(['Toluca', 'Metepec', 'CDMX', 'Guadalajara', 'Monterrey'].map(m => [m, m]), dm.muni, 'muni');
+    V.dmTipos = chipsOf([['demo', 'Demo en casa'], ['show', 'Show de ventas']], dm.tipo, 'tipo');
+    V.dmProms = chipsOf(owners.slice(0, 5).map(o => [o, PEOPLE[o].s]), dm.prom, 'prom');
+    V.onDmFecha = e => setDm({ fecha: e.target.value }); V.onDmHora = e => setDm({ hora: e.target.value });
+    const dmCli = CL.find(c => c.id === dm.cid);
+    const cliName = dm.creating ? (dm.newName || 'Cliente nuevo') : dmCli ? dmCli.n : '—';
+    const diaL = (dm.fecha === iso(8) ? 'Hoy · ' : '') + fmtD(dm.fecha);
+    V.sumRows = [{ k: 'Cliente', v: cliName }, { k: 'Dirección', v: (dm.calle ? dm.calle + ', ' : '') + dm.col + ', ' + dm.muni }, { k: 'Cuándo', v: diaL + ' · ' + dm.hora }, { k: 'Promotor', v: PEOPLE[dm.prom].n }, { k: 'Tipo', v: dm.tipo === 'demo' ? 'Demo en casa' : 'Show de ventas' }];
+    V.dmSave = () => {
+      if (!dm.cid && !(dm.creating && dm.newName.trim())) return this.setState({ dmErr: 'Elige un cliente o escribe el nombre del cliente nuevo.' });
+      if (!(dm.col.trim() && dm.calle.trim())) return this.setState({ dmErr: 'Falta la calle, número y colonia para llegar a la demo.' });
+      if (!dm.fecha || !dm.hora) return this.setState({ dmErr: 'Elige la fecha y la hora de la demo.' });
+      const eh = +dm.hora.slice(0, 2) + 2, dday = +dm.fecha.slice(8, 10);
+      this.setState({ dmDone: true, dmErr: '', aDay: dday, newEv: [...st.newEv, { id: 'n' + Date.now(), day: dday, time: dm.hora, end: String(eh).padStart(2, '0') + dm.hora.slice(2), type: dm.tipo, cid: dm.cid, sub: cliName + ' · ' + dm.col + ', ' + dm.muni, owner: dm.prom }] });
+    };
+    V.doneLine = cliName + ' · ' + diaL + ', ' + dm.hora;
+    V.waMsg = 'Hola ' + cliName.split(' ')[0] + ', soy ' + PEOPLE[dm.prom].s + ' de Royal Prestige. Te confirmo tu demostración de cocina el ' + diaL.replace('Hoy · ', '') + ' a las ' + dm.hora + '. ¿Sigue bien para ti?';
+    V.wa = st.wa; V.waLabel = st.wa ? 'Recordatorio enviado' : 'Enviar recordatorio por WhatsApp'; V.waBg = st.wa ? 'var(--ok)' : 'var(--acc)';
+    V.sendWa = () => { this.setState({ wa: true }); this._say('Recordatorio enviado'); };
+    V.again = () => this.setState({ dmDone: false, wa: false, dm: { ...dm, cid: null, creating: false, newName: '', calle: '', col: '', notas: '' } });
+    // Pipeline
+    V.cols = STAGES.map(s => { const cards = CL.filter(c => c.etapa === s[0]).map(c => ({ ...c, drag: () => { this._drag = c.id; }, open: go('clientes', { cid: c.id }) })); return { id: s[0], l: s[1], count: cards.length, cards, empty: cards.length === 0, over: e => e.preventDefault(), drop: e => { e.preventDefault(); if (this._drag) { this.setState({ stages: { ...this.state.stages, [this._drag]: s[0] } }); this._say('Movido a ' + s[1]); } this._drag = null; } }; });
+    // KPIs
+    const scopesOK = st.role === 'promotor' ? ['yo'] : st.role === 'jr' ? ['yo', 'equipo'] : ['yo', 'equipo', 'territorio'];
+    const sc = scopesOK.includes(st.kScope) ? st.kScope : 'yo', rg = st.kRange;
+    V.kScopes = [['yo', 'Yo'], ['equipo', 'Equipo'], ['territorio', 'Territorio']].filter(k => scopesOK.includes(k[0])).map(k => ({ l: k[1], on: sc === k[0], cls: sc === k[0] ? 'on' : '', pick: () => this.setState({ kScope: k[0] }) }));
+    V.kRanges = [['semana', 'Semana'], ['mes', 'Mes']].map(k => ({ l: k[1], on: rg === k[0], cls: rg === k[0] ? 'on' : '', pick: () => this.setState({ kRange: k[0] }) }));
+    V.kUnit = rg === 'semana' ? 'semana' : 'mes';
+    const md = { yo: 1, equipo: 2.4, territorio: 5.2 }[sc], mv = { yo: 1, equipo: 2, territorio: 4.5 }[sc];
+    const B = rg === 'semana' ? { d: [3, 5, 4, 6, 5, 6], v: [8, 9, 7, 10, 9, 11], lab: ['S36', 'S37', 'S38', 'S39', 'S40', 'S41'], ven: [1, 2, 1, 3, 2, 2], rec: [0, 1, 0, 1, 0, 1], pr: 5 } : { d: [14, 17, 19, 18, 22, 21], v: [31, 36, 40, 38, 44, 43], lab: ['May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct'], ven: [5, 6, 4, 8, 7, 7], rec: [1, 2, 1, 2, 1, 2], pr: 19 };
+    const D = B.d.map(x => Math.round(x * md)), Vi = B.v.map(x => Math.round(x * md)), VE = B.ven.map(x => Math.round(x * mv)), RE = B.rec.map(x => Math.round(x * md));
+    const CMP = { yo: { semana: [4.5, 1.2, 27, 3.8], mes: [17, 4.4, 26, 14] }, equipo: { semana: [11, 3, 27, 9], mes: [45, 12, 27, 38] }, territorio: { semana: [30, 9, 30, 25], mes: [118, 34, 29, 100] } }[sc][rg];
+    const CL_ = { yo: 'prom. del equipo', equipo: 'prom. territorio', territorio: 'meta' }[sc];
+    const cur = [D[5], VE[5], Math.round(VE[5] / D[5] * 100), Math.round(B.pr * md)];
+    V.kCards = [['Demos', cur[0], ''], ['Ventas', cur[1], ''], ['% de cierre', cur[2] + '%', '%'], ['Prospectos nuevos', cur[3], '']].map((k, i) => { const x = Math.round((cur[i] - CMP[i]) * 10) / 10; return { l: k[0], v: k[1], d: (x >= 0 ? '+' : '−') + Math.abs(x) + k[2] + ' vs ' + CL_, color: x >= 0 ? 'var(--ok)' : 'var(--bad)' }; });
+    const mx = Math.max(...Vi);
+    V.bars6 = B.lab.map((l, i) => ({ lab: l, dv: D[i], vv: Vi[i], dh: Math.round(D[i] / mx * 130) + 2, vh: Math.round(Vi[i] / mx * 130) + 2 }));
+    const mxl = Math.max(...VE, ...RE, 1), pts = arr => arr.map((v, i) => (20 + i * 60) + ',' + Math.round(110 - v / mxl * 95)).join(' ');
+    V.lineV = pts(VE); V.lineR = pts(RE);
+    const LB = rg === 'semana' ? { paola: 2, karen: 2, dani: 1, jorge: 1, marco: 1, ivan: 1, luis: 1, ale: 0, rosa: 0 } : { paola: 6, karen: 7, dani: 5, marco: 4, jorge: 4, luis: 3, ivan: 3, ale: 2, rosa: 1 };
+    const lbIds = sc === 'territorio' ? EMP : ['marco', 'karen', 'luis'];
+    const lbS = lbIds.map(id => ({ id, v: LB[id] })).sort((a, b) => b.v - a.v), lbMax = Math.max(1, lbS[0].v);
+    V.lbRows = lbS.map((r, i) => ({ pos: i + 1, n: PEOPLE[r.id].n, v: r.v, w: Math.round(r.v / lbMax * 100) }));
+    V.kHelp = st.role !== 'promotor';
+    V.helpList = [{ n: 'Alejandra Treviño', why: '0 demos esta semana · ventas bajo el promedio' }, { n: 'Iván Granados', why: '12% de cierre · 4 días sin registrar visitas' }, { n: 'Luis Fernando Ayala', why: '3 prospectos sin seguimiento en 6 días' }].map(h => ({ ...h, act: say('Acompañamiento propuesto a ' + h.n.split(' ')[0]) }));
+    // Login y sesión
+    V.v.login = st.view === 'login';
+    V.hasLoginErr = !!st.loginErr; V.loginErr = st.loginErr; V.loginEmail = st.loginEmail; V.loginPass = st.loginPass;
+    V.onLoginEmail = e => this.setState({ loginEmail: e.target.value }); V.onLoginPass = e => this.setState({ loginPass: e.target.value });
+    V.loginRoles = ACCOUNTS.map(a => ({ l: a.l, d: a.d, ini: a.ini, on: st.loginRole === a.k, border: st.loginRole === a.k ? 'var(--acc)' : 'var(--line)', pick: () => this.setState({ loginRole: a.k, loginEmail: a.mail, loginPass: 'demo1234', loginErr: '' }) }));
+    V.doLogin = () => {
+      if (!st.loginEmail.includes('@') || st.loginPass.length < 4) return this.setState({ loginErr: 'Revisa tu correo y tu contraseña (mínimo 4 caracteres).' });
+      this.setState({ role: st.loginRole, view: st.loginRole === 'admin' ? 'reportes' : 'inicio', loginErr: '', rEmp: null, kScope: 'yo', aProm: 'todos', dmDone: false });
+    };
+    V.logout = () => this.setState({ view: 'login', loginErr: '' });
+    // Reportes (admin)
+    const rg2 = st.rpRange, SR = STATS[rg2];
+    const metr = id => { const a = SR[id]; return { demos: a[0], visitas: a[1], ventas: a[2], monto: a[3], prosp: a[4], rec: a[5], cierre: a[0] ? Math.round(a[2] / a[0] * 100) : 0 }; };
+    V.rpRanges = [['semana', 'Semana'], ['mes', 'Mes']].map(k => ({ l: k[1], on: rg2 === k[0], cls: rg2 === k[0] ? 'on' : '', pick: () => this.setState({ rpRange: k[0] }) }));
+    const all = EMP.map(id => ({ id, ...metr(id) }));
+    const tot = all.reduce((a, r) => ({ demos: a.demos + r.demos, ventas: a.ventas + r.ventas, monto: a.monto + r.monto }), { demos: 0, ventas: 0, monto: 0 });
+    V.rpTotals = [{ l: 'Demos', v: tot.demos }, { l: 'Ventas', v: tot.ventas }, { l: 'Monto vendido', v: mxn(tot.monto) }, { l: '% de cierre', v: Math.round(tot.ventas / tot.demos * 100) + '%' }];
+    V.rpCols = [['demos', 'Demos'], ['ventas', 'Ventas'], ['cierre', '% cierre'], ['monto', 'Monto'], ['visitas', 'Visitas'], ['prosp', 'Prospectos']].map(c => ({ l: c[1], on: st.rpSort === c[0], color: st.rpSort === c[0] ? 'var(--acctxt)' : 'var(--mut)', arrow: st.rpSort === c[0] ? ' ↓' : '', pick: () => this.setState({ rpSort: c[0] }) }));
+    const sorted = all.slice().sort((a, b) => b[st.rpSort] - a[st.rpSort] || b.monto - a.monto);
+    const eid = st.rEmp || sorted[0].id;
+    V.rpRows = sorted.map(r => ({ n: PEOPLE[r.id].n, rol: PEOPLE[r.id].rol, ini: PEOPLE[r.id].ini, demos: r.demos, ventas: r.ventas, cierre: r.cierre + '%', monto: mxn(r.monto), visitas: r.visitas, prosp: r.prosp, help: r.demos === 0 || (r.demos >= 5 && r.cierre < 15), sel: r.id === eid, bg: r.id === eid ? 'var(--accsoft)' : 'transparent', open: () => this.setState({ rEmp: r.id }) }));
+    V.exportRp = say('Reporte exportado: reporte-royal-prestige.csv');
+    const em = metr(eid);
+    V.emp = { n: PEOPLE[eid].n, s: PEOPLE[eid].s, rol: PEOPLE[eid].rol, ini: PEOPLE[eid].ini, clientes: CLIENTS.filter(c => c.owner === eid).length };
+    V.empMetrics = [{ l: 'Demos', v: em.demos, fs: 24 }, { l: 'Visitas', v: em.visitas, fs: 24 }, { l: 'Ventas', v: em.ventas, fs: 24 }, { l: 'Monto', v: mxn(em.monto), fs: 19 }, { l: '% de cierre', v: em.cierre + '%', fs: 24 }, { l: 'Prospectos · reclutas', v: em.prosp + ' · ' + em.rec, fs: 19 }];
+    V.empEvents = EV.filter(e => e.owner === eid && (e.type === 'demo' || e.type === 'show'));
+    V.empNoEvents = V.empEvents.length === 0;
+    // ---- Agendar / registrar visita
+    V.v.visita = st.view === 'visita'; V.v.clienteForm = st.view === 'clienteForm';
+    const vt = st.vt; V.vt = vt;
+    const VT = [['demo', 'Demo en casa', 'demo'], ['show', 'Show de ventas', 'show'], ['venta', 'Venta / cierre', 'visita'], ['mant', 'Mantenimiento', 'visita'], ['seg', 'Seguimiento', 'seg'], ['entrega', 'Entrega de producto', 'visita'], ['prosp', 'Prospección', 'visita']];
+    const setVt = p => this._in('vt', { ...p, err: '' });
+    const vCli = CL.find(c => c.id === vt.cid), vT = VT.find(t => t[0] === vt.tipo);
+    V.vtHecha = vt.mode === 'hecha'; V.vtSegA = V.vtHecha ? '' : 'on'; V.vtSegH = V.vtHecha ? 'on' : '';
+    V.vtModeA = () => setVt({ mode: 'agendar' }); V.vtModeH = () => setVt({ mode: 'hecha' });
+    V.vtHasErr = !!vt.err; V.vtCid = vt.cid || '';
+    V.vtClOpts = [{ v: '', l: 'Selecciona un cliente', sel: !vt.cid }].concat(CL.slice().sort((a, b) => a.n.localeCompare(b.n, 'es')).map(c => ({ v: c.id, l: c.n + ' · ' + c.muni, sel: vt.cid === c.id })));
+    V.vtTipoOpts = opts(VT.map(t => [t[0], t[1]]), vt.tipo);
+    V.vtResOpts = opts(['Interesado', 'Pide más información', 'No estaba', 'No le interesa', 'Compró'].map(x => [x, x]), vt.res);
+    V.vtProxOpts = opts(['Llamar', 'WhatsApp', 'Agendar demo', 'Nueva visita', 'Sin seguimiento'].map(x => [x, x]), vt.prox);
+    V.vtFechaL = V.vtHecha ? 'Fecha de la visita' : 'Fecha';
+    V.vtNotePh = V.vtHecha ? '¿Qué te dijo? ¿Qué le interesó?' : 'Referencias, qué llevar, a quién preguntar…';
+    V.vtSaveLabel = V.vtHecha ? 'Registrar visita' : 'Agendar visita';
+    V.vtSum = [{ k: 'Cliente', v: vCli ? vCli.n : '—' }, { k: 'Tipo', v: vT[1] }, { k: 'Cuándo', v: (vt.fecha ? fmtD(vt.fecha) : '—') + ' · ' + (vt.hora || '—') }, { k: 'Modo', v: V.vtHecha ? 'Visita ya realizada' : 'Por realizar' }];
+    V.onVtCid = e => setVt({ cid: e.target.value }); V.onVtTipo = e => setVt({ tipo: e.target.value });
+    V.onVtFecha = e => setVt({ fecha: e.target.value }); V.onVtHora = e => setVt({ hora: e.target.value });
+    V.onVtRes = e => setVt({ res: e.target.value }); V.onVtProx = e => setVt({ prox: e.target.value }); V.onVtSeg = e => setVt({ seg: e.target.value });
+    V.onVtNota = e => setVt({ nota: e.target.value });
+    V.vtNewCl = () => this.setState({ view: 'clienteForm', cf: freshCf(null, 'visita') });
+    V.vtCancel = () => this.setState(vt.from === 'cliente' ? { view: 'clientes', cid: vt.cid } : { view: 'agenda' });
+    V.saveVisita = () => {
+      const c = CL.find(x => x.id === vt.cid), T = vT;
+      if (!c) return this._in('vt', { err: 'Elige el cliente de la visita.' });
+      if (!vt.fecha || !vt.hora) return this._in('vt', { err: 'Elige la fecha y la hora.' });
+      const hecha = vt.mode === 'hecha';
+      const day = +vt.fecha.slice(8, 10), m0 = mins(vt.hora), m1 = Math.min(m0 + (T[2] === 'demo' || T[2] === 'show' ? 120 : T[2] === 'seg' ? 20 : 60), 23 * 60 + 59);
+      const end = String(Math.floor(m1 / 60)).padStart(2, '0') + ':' + String(m1 % 60).padStart(2, '0');
+      const ev = { id: 'v' + Date.now(), day, time: vt.hora, end, type: T[2], lbl: T[1], cid: c.id, t: T[1], sub: c.n + ' · ' + c.col + ', ' + c.muni, owner: isAdm ? c.owner : role.me };
+      if (hecha) { ev.hecha = true; ev.res = vt.res; }
+      const patch = { newEv: [...st.newEv, ev] };
+      if (hecha) patch.cEdits = { ...st.cEdits, [c.id]: { ...(st.cEdits[c.id] || {}), ult: 0 } };
+      else if ((T[2] === 'demo' || T[2] === 'show') && stageOf(c) === 'prospecto') patch.stages = { ...st.stages, [c.id]: 'cita' };
+      if (vt.from === 'cliente') Object.assign(patch, { view: 'clientes', cid: c.id }); else Object.assign(patch, { view: 'agenda', aDay: day });
+      this.setState(patch);
+      this._say(hecha ? 'Visita registrada · ' + T[1] : 'Visita agendada · ' + fmtD(vt.fecha) + ', ' + vt.hora);
+    };
+    // ---- Alta / edición de cliente
+    const cf = st.cf; V.cf = cf;
+    const setCf = p => this._in('cf', { ...p, err: '' });
+    V.cfHasErr = !!cf.err;
+    V.cfOrigOpts = opts(['Referido', 'Facebook', 'WhatsApp', 'Evento'].map(x => [x, x]), cf.origen);
+    V.cfMuniOpts = opts(['Toluca', 'Metepec', 'CDMX', 'Guadalajara', 'Monterrey'].map(x => [x, x]), cf.muni);
+    V.cfSaveLabel = cf.id ? 'Guardar cambios' : 'Guardar cliente';
+    V.onCfN = e => setCf({ n: e.target.value }); V.onCfTel = e => setCf({ tel: e.target.value }); V.onCfMail = e => setCf({ mail: e.target.value });
+    V.onCfOrig = e => setCf({ origen: e.target.value }); V.onCfCalle = e => setCf({ calle: e.target.value }); V.onCfCol = e => setCf({ col: e.target.value });
+    V.onCfMuni = e => setCf({ muni: e.target.value }); V.onCfNotas = e => setCf({ notas: e.target.value });
+    V.cfCancel = () => this.setState({ view: cf.from === 'demo' ? 'demo' : cf.from === 'visita' ? 'visita' : 'clientes' });
+    if (st.view === 'visita') V.title = V.vtHecha ? 'Registrar visita' : 'Agendar visita';
+    if (st.view === 'clienteForm') V.title = cf.id ? 'Editar datos de ' + cf.n.split(' ')[0] : 'Agregar cliente';
+    V.saveCf = () => {
+      const n = cf.n.trim(), dg = cf.tel.replace(/\D/g, ''), mail = cf.mail.trim();
+      const bad = m => this._in('cf', { err: m });
+      if (n.length < 3) return bad('Escribe el nombre completo del cliente.');
+      if (dg.length < 10) return bad('El teléfono debe tener 10 dígitos.');
+      if (mail && !/^\S+@\S+\.\S+$/.test(mail)) return bad('Revisa el correo: falta el @ o el dominio.');
+      const tel = dg.length === 10 ? dg.slice(0, 3) + ' ' + dg.slice(3, 6) + ' ' + dg.slice(6, 8) + ' ' + dg.slice(8) : cf.tel.trim();
+      if (cf.id) {
+        this.setState({ cEdits: { ...st.cEdits, [cf.id]: { ...(st.cEdits[cf.id] || {}), n, tel, mail, origen: cf.origen, calle: cf.calle.trim(), col: cf.col.trim(), muni: cf.muni, notas: cf.notas.trim() } }, view: 'clientes', cid: cf.id });
+        this._say('Datos actualizados');
+        return;
+      }
+      const cid = 'cn' + Date.now();
+      const nc = { id: cid, n, muni: cf.muni, col: cf.col.trim(), calle: cf.calle.trim(), tel, mail, etapa: 'prospecto', origen: cf.origen, ult: 0, owner: isAdm ? 'rosa' : role.me, notas: cf.notas.trim(), prod: [], ref: [], tl: [['userplus', 'Cliente agregado', 'Registrado en el CRM', 'Ahora']] };
+      const base = { newCl: [...st.newCl, nc] };
+      if (cf.from === 'demo') this.setState({ ...base, view: 'demo', dmDone: false, dmErr: '', dm: { ...st.dm, cid, creating: false, calle: nc.calle, col: nc.col, muni: nc.muni } });
+      else if (cf.from === 'visita') this.setState({ ...base, view: 'visita', vt: { ...st.vt, cid, err: '' } });
+      else this.setState({ ...base, view: 'clientes', cid });
+      this._say('Cliente agregado');
+    };
+    return V;
+  }
+}
+</script>
+</body>
+</html>

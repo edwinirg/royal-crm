@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<title>Sistema de diseño Royal Prestige</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0}
+*{box-sizing:border-box}
+.th{--bg:#F5F8FD;--card:#FFFFFF;--ink:#101828;--mut:#4F5D78;--line:#DCE4F0;--sub:#EBF0F8;--acc:#0F3C99;--onacc:#FFFFFF;--accsoft:#E1EAFB;--acctxt:#0F3C99;--goldsoft:#FBEFD2;--goldtxt:#6F4F12;--ok:#1F6B45;--oksoft:#DDF0E5;--warn:#9A4A00;--warnsoft:#FBE9D2;--bad:#A3262A;--badsoft:#F9DEDE;--shadow:0 1px 2px rgba(16,24,40,.06),0 4px 14px rgba(16,24,40,.07);--c-visita:#8A5A00;--c-demo:#0F3C99;--c-show:#A02F6B;--c-recl:#1B7A73;--c-seg:#6556A8;background:var(--bg);color:var(--ink);border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:20px;border:1px solid var(--line)}
+.th.dk{--bg:#0B1220;--card:#131C30;--ink:#EEF3FC;--mut:#A6B3CC;--line:#243352;--sub:#1A2744;--acc:#86AEFF;--onacc:#07163A;--accsoft:#16284F;--acctxt:#B3CBFF;--goldsoft:#3A2F1A;--goldtxt:#EDCB88;--ok:#7BD3A0;--oksoft:#16301F;--warn:#F0B070;--warnsoft:#38260F;--bad:#F2928F;--badsoft:#3B1B1B;--shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);--c-visita:#E8B85C;--c-demo:#86AEFF;--c-show:#F08CB8;--c-recl:#5FC7BF;--c-seg:#B4A7E8}
+.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 18px;border-radius:14px;border:0;background:var(--acc);color:var(--onacc);font-family:inherit;font-size:15px;font-weight:700}
+.btn2{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 16px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-family:inherit;font-size:15px;font-weight:700}
+.chip{min-height:44px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-family:inherit;font-size:14px;font-weight:600;display:inline-flex;align-items:center}
+.chip.on{background:var(--acc);color:var(--onacc);border-color:var(--acc)}
+.pill{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:700;background:var(--sub);color:var(--ink)}
+.st-cita{background:#D6F0EC;color:#0F5E58}.st-demo{background:var(--accsoft);color:var(--acctxt)}.st-seg{background:var(--goldsoft);color:var(--goldtxt)}.st-cerrada{background:var(--oksoft);color:var(--ok)}.st-nov{background:var(--badsoft);color:var(--bad)}
+.th.dk .st-cita{background:#12302E;color:#7FDCD3}
+.pill.warn{background:var(--warnsoft);color:var(--warn)}.pill.ok{background:var(--oksoft);color:var(--ok)}
+select.input,input[type=date].input,input[type=time].input{appearance:auto}
+.input{width:100%;min-height:52px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:0 14px;font-family:inherit;font-size:16px}
+.lbl{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
+.tile{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none}
+.ty-visita{--tc:var(--c-visita)}.ty-demo{--tc:var(--c-demo)}.ty-show{--tc:var(--c-show)}.ty-recl{--tc:var(--c-recl)}.ty-seg{--tc:var(--c-seg)}
+.tile.ty{background:color-mix(in srgb,var(--tc) 16%,var(--card));color:var(--tc)}
+.skel{border-radius:16px;background:linear-gradient(90deg,var(--sub),var(--line),var(--sub));background-size:200% 100%;animation:sh 1.2s linear infinite}
+@keyframes sh{from{background-position:200% 0}to{background-position:-200% 0}}
+.sw{border-radius:14px;min-height:76px;padding:10px 12px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;font-size:12px;font-weight:700;border:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:10px}
+h2.sec{margin:0;font-size:22px;font-weight:800;letter-spacing:-.01em}
+</style>
+</helmet>
+<div style="max-width:1360px;margin:0 auto;padding:40px 28px 64px;display:flex;flex-direction:column;gap:28px;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#E9EEF6;color:#101828;font-size:15px">
+<header style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#4F5D78">Royal Prestige · CRM de ventas</div><h1 style="margin:0;font-size:44px;font-weight:800;letter-spacing:-.02em">Sistema de diseño</h1><p style="margin:0;max-width:720px;line-height:1.5;color:#3F4B63">Base neutra azulada con el azul del logotipo como acento (variante celeste disponible). Tipografía Plus Jakarta Sans, esquinas de 14 a 18 px, sombras suaves y áreas táctiles mínimas de 44 px.</p></header>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(560px,100%),1fr));gap:20px;align-items:start">
+<div class="th">
+<div class="lbl">Tema claro</div>
+<h2 class="sec">Color</h2>
+<div class="grid"><sc-for list="{{lightSw}}" as="s" hint-placeholder-count="8"><div class="sw" style="background:{{s.bg}};color:{{s.fg}}"><span>{{s.n}}</span><span style="font-weight:500;opacity:.9">{{s.hex}}</span></div></sc-for></div>
+<h2 class="sec">Tipos de evento</h2>
+<div class="chips" style="display:flex;gap:10px;flex-wrap:wrap"><sc-for list="{{types}}" as="t" hint-placeholder-count="5"><div class="card {{t.cls}}" style="display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;min-height:56px"><span class="tile ty"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{t.path}}"/></svg></span><b style="font-size:14px">{{t.l}}</b></div></sc-for></div>
+<h2 class="sec">Botones y chips</h2>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn">Guardar cierre</button><button class="btn2">Secundario</button><button class="chip on">Activo</button><button class="chip">Filtro</button><span class="pill st-cita">Cita agendada</span><span class="pill st-demo">Demo realizada</span><span class="pill st-seg">En seguimiento</span><span class="pill st-cerrada">Venta cerrada</span><span class="pill st-nov">No venta</span><span class="pill warn">Cierre pendiente</span></div>
+<h2 class="sec">Campos</h2>
+<label class="lbl" for="sl">Nombre completo</label><input id="sl" class="input" placeholder="Ej. Carmen Beltrán Ruiz">
+<label class="lbl" for="sls">Cliente</label><select id="sls" class="input"><option>Patricia Gómez Ríos</option><option>Laura Hernández</option></select>
+<label class="lbl" for="slsf">Fecha</label><input id="slsf" class="input" type="date" value="2026-10-09">
+<label class="lbl" for="slsh">Hora</label><input id="slsh" class="input" type="time" value="17:30">
+<h2 class="sec">Estados</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:12px">
+<div class="card" style="padding:18px;text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center"><span class="tile" style="background:var(--accsoft);color:var(--acctxt);width:52px;height:52px;border-radius:16px"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.cal}}"/></svg></span><b>Día libre</b><span style="font-size:13px;color:var(--mut)">Estado vacío con acción clara.</span></div>
+<div style="display:flex;flex-direction:column;gap:8px"><div class="skel" style="height:44px"></div><div class="skel" style="height:44px"></div><div class="skel" style="height:44px"></div></div>
+<div role="alert" style="background:var(--badsoft);color:var(--bad);border-radius:14px;padding:14px;font-weight:700;display:flex;gap:8px;align-items:center"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.alert}}"/></svg>Falta la colonia para llegar a la demo.</div>
+<div style="background:var(--oksoft);color:var(--ok);border-radius:14px;padding:14px;font-weight:700;display:flex;gap:8px;align-items:center"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.check}}"/></svg>Demo agendada y recordatorio enviado.</div></div>
+</div>
+<div class="th dk">
+<div class="lbl">Tema oscuro</div>
+<h2 class="sec">Color</h2>
+<div class="grid"><sc-for list="{{darkSw}}" as="s" hint-placeholder-count="8"><div class="sw" style="background:{{s.bg}};color:{{s.fg}}"><span>{{s.n}}</span><span style="font-weight:500;opacity:.9">{{s.hex}}</span></div></sc-for></div>
+<h2 class="sec">Tipos de evento</h2>
+<div style="display:flex;gap:10px;flex-wrap:wrap"><sc-for list="{{types}}" as="t" hint-placeholder-count="5"><div class="card {{t.cls}}" style="display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;min-height:56px"><span class="tile ty"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{t.path}}"/></svg></span><b style="font-size:14px">{{t.l}}</b></div></sc-for></div>
+<h2 class="sec">Botones y chips</h2>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn">Guardar cierre</button><button class="btn2">Secundario</button><button class="chip on">Activo</button><button class="chip">Filtro</button><span class="pill st-cita">Cita agendada</span><span class="pill st-demo">Demo realizada</span><span class="pill st-seg">En seguimiento</span><span class="pill st-cerrada">Venta cerrada</span><span class="pill st-nov">No venta</span><span class="pill warn">Cierre pendiente</span></div>
+<h2 class="sec">Campos</h2>
+<label class="lbl" for="sd">Nombre completo</label><input id="sd" class="input" placeholder="Ej. Carmen Beltrán Ruiz">
+<label class="lbl" for="sds">Cliente</label><select id="sds" class="input"><option>Patricia Gómez Ríos</option><option>Laura Hernández</option></select>
+<label class="lbl" for="sdsf">Fecha</label><input id="sdsf" class="input" type="date" value="2026-10-09">
+<label class="lbl" for="sdsh">Hora</label><input id="sdsh" class="input" type="time" value="17:30">
+<h2 class="sec">Estados</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:12px">
+<div class="card" style="padding:18px;text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center"><span class="tile" style="background:var(--accsoft);color:var(--acctxt);width:52px;height:52px;border-radius:16px"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.cal}}"/></svg></span><b>Día libre</b><span style="font-size:13px;color:var(--mut)">Estado vacío con acción clara.</span></div>
+<div style="display:flex;flex-direction:column;gap:8px"><div class="skel" style="height:44px"></div><div class="skel" style="height:44px"></div><div class="skel" style="height:44px"></div></div>
+<div role="alert" style="background:var(--badsoft);color:var(--bad);border-radius:14px;padding:14px;font-weight:700;display:flex;gap:8px;align-items:center"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.alert}}"/></svg>Falta la colonia para llegar a la demo.</div>
+<div style="background:var(--oksoft);color:var(--ok);border-radius:14px;padding:14px;font-weight:700;display:flex;gap:8px;align-items:center"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="{{ic.check}}"/></svg>Demo agendada y recordatorio enviado.</div></div>
+</div>
+</div>
+<section style="background:#FFFFFF;border:1px solid #DCE4F0;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px">
+<h2 class="sec">Marca y accesos</h2>
+<div style="display:flex;flex-wrap:wrap;gap:24px;align-items:center"><img src="logo.png" alt="Royal Prestige, distribuidor autorizado" style="width:160px;height:160px;border-radius:50%;box-shadow:0 6px 20px rgba(16,24,40,.12)"><p style="margin:0;max-width:460px;line-height:1.5;color:#3F4B63">El logotipo se usa sobre fondo blanco circular, con espacio libre alrededor, en el login, la barra lateral y el perfil. El acento azul sale de la paleta del león del logotipo.</p></div>
+<div class="scrollx" style="overflow-x:auto"><div style="min-width:640px;display:grid;grid-template-columns:minmax(220px,2fr) repeat(4,minmax(110px,1fr));gap:1px;background:#DCE4F0;border:1px solid #DCE4F0;border-radius:14px;overflow:hidden">
+<sc-for list="{{matrix}}" as="c" hint-placeholder-count="30"><div style="background:{{c.bg}};padding:10px 12px;font-size:14px;font-weight:{{c.w}};min-height:44px;display:flex;align-items:center">{{c.t}}</div></sc-for></div></div>
+</section>
+<section style="background:#FFFFFF;border:1px solid #DCE4F0;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px">
+<h2 class="sec">Tipografía · Plus Jakarta Sans</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:16px">
+<sc-for list="{{typeScale}}" as="t" hint-placeholder-count="6"><div style="display:flex;flex-direction:column;gap:2px;border-bottom:1px solid #DCE4F0;padding-bottom:10px"><span style="font-size:{{t.size}}px;font-weight:{{t.weight}};letter-spacing:-.01em;line-height:1.15">{{t.sample}}</span><span style="font-size:12.5px;color:#4F5D78">{{t.spec}}</span></div></sc-for></div>
+</section>
+<section style="background:#FFFFFF;border:1px solid #DCE4F0;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:12px">
+<h2 class="sec">Reglas del sistema</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:14px">
+<sc-for list="{{rules}}" as="r" hint-placeholder-count="6"><div style="background:#EEF2F9;border-radius:16px;padding:14px 16px"><b style="display:block;margin-bottom:4px">{{r.t}}</b><span style="color:#3F4B63;line-height:1.45;font-size:14px">{{r.d}}</span></div></sc-for></div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const sw = (arr, dark) => arr.map(a => ({ n: a[0], hex: a[1], bg: a[1], fg: a[2] }));
+    return {
+      ic: { cal: 'M4 6.5h16V20H4zM4 10.5h16M8 3.5v4M16 3.5v4', alert: 'M12 4 2.5 20h19zM12 10v4.5M12 17.5v.01', check: 'M5 12.5l4.5 4.5L19 7.5' },
+      lightSw: sw([['Fondo', '#F5F8FD', '#101828'], ['Tarjeta', '#FFFFFF', '#101828'], ['Tinta', '#101828', '#FFFFFF'], ['Texto suave', '#4F5D78', '#FFFFFF'], ['Acento azul', '#0F3C99', '#FFFFFF'], ['Azul suave', '#E1EAFB', '#0F3C99'], ['Celeste', '#0A5CB8', '#FFFFFF'], ['Éxito', '#DDF0E5', '#1F6B45'], ['Alerta', '#FBE9D2', '#9A4A00'], ['Error', '#F9DEDE', '#A3262A']]),
+      darkSw: sw([['Fondo', '#0B1220', '#EEF3FC'], ['Tarjeta', '#131C30', '#EEF3FC'], ['Tinta', '#EEF3FC', '#0B1220'], ['Texto suave', '#A6B3CC', '#0B1220'], ['Acento azul', '#86AEFF', '#07163A'], ['Azul suave', '#16284F', '#B3CBFF'], ['Celeste', '#7CC0FF', '#062244'], ['Éxito', '#16301F', '#7BD3A0'], ['Alerta', '#38260F', '#F0B070'], ['Error', '#3B1B1B', '#F2928F']]),
+      matrix: [['', 'Vendedor', 'JR', 'Líder', 'Admin']].concat([['Ver sus clientes, visitas y demos', 'Sí', 'Sí', 'Sí', 'Sí'], ['Ver a su equipo', '—', 'Directo', 'Compañía', 'Toda la red'], ['Dirección completa del cliente', 'Con cita', 'Si es cerrador', 'Sí', 'Sí'], ['Asignar cerradores', '—', 'Permiso', 'Sí', 'Sí'], ['Reportes por empleado', '—', '—', 'KPIs', 'Completos']]).reduce((a, r) => a.concat(r), []).map((t, i) => ({ t, bg: i < 5 ? '#EEF2F9' : '#FFFFFF', w: (i < 5 || i % 5 === 0) ? 700 : 500 })),
+      types: [['visita', 'Visita', 'M12 21s6.5-5.8 6.5-11a6.5 6.5 0 1 0-13 0c0 5.2 6.5 11 6.5 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z'], ['demo', 'Demo en casa', 'M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5zM3.5 7.5 12 12l8.5-4.5M12 12v9'], ['show', 'Show de ventas', 'M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.8 6.8 19.6l1-5.8L3.5 9.7l5.9-.8z'], ['recl', 'Reclutamiento', 'M10 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 20c0-3.3 3-5.5 7-5.5M18 9v6M15 12h6'], ['seg', 'Seguimiento', 'M4 12a8 8 0 0 1 14-5.3L20 9M20 4v5h-5M20 12a8 8 0 0 1-14 5.3L4 15M4 20v-5h5']].map(t => ({ cls: 'ty-' + t[0], l: t[1], path: t[2] })),
+      typeScale: [['Display', 'Resultados del mes', 44, 800, '44 / 800 · números grandes y títulos de página'], ['Título', 'Buenos días, Karen', 26, 800, '26 / 800 · saludo y encabezados'], ['Sección', 'Mi día', 19, 800, '19 / 800 · títulos de sección'], ['Cuerpo', 'Demo en casa con Patricia', 15, 600, '15 / 600 · texto principal, mínimo en móvil'], ['Secundario', 'Col. Bellavista, Metepec', 13.5, 500, '13.5 / 500 · apoyo; contraste AA con texto suave'], ['Etiqueta', 'PRÓXIMA ACCIÓN', 12, 700, '12 / 700 · mayúsculas con 0.05em']].map(t => ({ sample: t[1], size: t[2], weight: t[3], spec: t[0] + ' · ' + t[4] })),
+      rules: [['Táctil', 'Todo control mide mínimo 44 px de alto; el botón principal 48 px. Se opera con una mano y el botón + queda al alcance del pulgar.'], ['Contraste', 'Texto sobre fondo AA (4.5:1). Los rellenos de color llevan texto oscuro o claro según el tema, nunca blanco sobre tonos medios.'], ['Color con significado', 'Cada tipo de evento combina color, ícono y etiqueta: nunca depende solo del tono.'], ['Acceso por rol', 'El login abre una vista distinta según el usuario: vendedor, distribuidor JR, líder o administrador. El admin ve reportes por empleado; la dirección completa depende del rol.'], ['Velocidad', 'Registrar una demo toma 4 pasos con chips de un toque; el cierre es un clic y campos que aparecen según el resultado.'], ['Estados', 'Vacío con acción, esqueleto de carga, error en línea con role alert y éxito con confirmación y recordatorio por WhatsApp.']].map(r => ({ t: r[0], d: r[1] }))
+    };
+  }
+}
+</script>
+</body>
+</html>

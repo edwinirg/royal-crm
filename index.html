@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Royal Prestige CRM – Prototipo</title>
+<style>
+body{margin:0;font-family:system-ui,sans-serif;background:#EBF0F8;color:#101828}
+nav{display:flex;gap:8px;padding:12px 16px;background:#fff;border-bottom:1px solid #DCE4F0;flex-wrap:wrap}
+nav button{border:1px solid #DCE4F0;background:#fff;border-radius:999px;padding:10px 18px;font:600 14px system-ui;cursor:pointer;min-height:44px}
+nav button[aria-pressed=true]{background:#0F3C99;color:#fff;border-color:#0F3C99}
+main{display:flex;justify-content:center;padding:16px}
+iframe{border:0;background:#fff;box-shadow:0 8px 30px rgba(16,24,40,.18);border-radius:12px;max-width:100%}
+</style>
+</head>
+<body>
+<nav>
+<button data-f="Main.dc.html" data-w="390" data-h="844" aria-pressed="true">Móvil</button>
+<button data-f="Desktop.dc.html" data-w="1280" data-h="800" aria-pressed="false">Escritorio</button>
+<button data-f="Sistema.dc.html" data-w="900" data-h="800" aria-pressed="false">Sistema de diseño</button>
+</nav>
+<main><iframe id="v" title="Prototipo" src="Main.dc.html" width="390" height="844"></iframe></main>
+<script>
+var v=document.getElementById('v');
+document.querySelectorAll('nav button').forEach(function(b){b.onclick=function(){
+document.querySelectorAll('nav button').forEach(function(x){x.setAttribute('aria-pressed','false')});
+b.setAttribute('aria-pressed','true');v.width=b.dataset.w;v.height=Math.max(b.dataset.h,window.innerHeight-90);v.src=b.dataset.f;};});
+</script>
+</body>
+</html>
